@@ -230,7 +230,16 @@ h2.sec{font-size:15px;text-transform:none;color:var(--white);margin:0 0 14px;fon
 <body class="splash-active">
 <div class="splash" id="splash" role="status" aria-label="Carregando o Copiloto Financeiro">
   <div class="splash-content">
-    <img class="splash-logo" src="../logotipo/logo.png" alt="Finanças Veras">
+    <svg class="splash-logo" viewBox="0 0 256 256" role="img" aria-label="Finanças Veras">
+      <defs><linearGradient id="splashMark" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#6AF5BF"/><stop offset="1" stop-color="#08C982"/></linearGradient></defs>
+      <rect width="256" height="256" rx="48" fill="#001D14"/>
+      <rect x="119" y="38" width="15" height="72" rx="5" fill="url(#splashMark)"/>
+      <rect x="87" y="67" width="15" height="69" rx="5" fill="url(#splashMark)"/>
+      <rect x="151" y="24" width="15" height="72" rx="5" fill="url(#splashMark)"/>
+      <path d="M67 96 103 145c6 8 17 8 23 0l52-72" fill="none" stroke="url(#splashMark)" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="128" y="181" text-anchor="middle" fill="#F8FAFC" font-family="Arial,sans-serif" font-size="15" letter-spacing="6">FINANÇAS</text>
+      <text x="128" y="218" text-anchor="middle" fill="#19E19A" font-family="Arial,sans-serif" font-size="30" font-weight="800" letter-spacing="2">VERAS</text>
+    </svg>
     <div class="splash-name">Copiloto Financeiro</div>
     <div class="splash-subtitle">Finanças Veras</div>
     <div class="splash-loader" aria-hidden="true"></div>
