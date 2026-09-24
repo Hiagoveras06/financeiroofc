@@ -357,8 +357,8 @@ let state = load();
 let editingId = null, currentType = "expense", editingGoalId = null, editingAccId = null, editingCardId = null, editingBillId = null, categoryTargetSelect = null;
 
 function load(){
-  try{ const raw = localStorage.getItem(KEY); if(raw){ const s = JSON.parse(raw); s.customCats=s.customCats||[]; s.goals=s.goals||[]; s.accounts=s.accounts||[]; s.cards=s.cards||[]; s.realBalance = (typeof s.realBalance==='number') ? s.realBalance : null; s.realBalanceDate = s.realBalanceDate || null; s.userName = typeof s.userName==='string' ? s.userName : ''; return s; } }catch(e){}
-  return { txns: [], bills: [], budgets: {}, customCats: [], goals: [], accounts: [], cards: [], realBalance: null, realBalanceDate: null, userName:'', seeded:false };
+  try{ const raw = localStorage.getItem(KEY); if(raw){ const s = JSON.parse(raw); s.customCats=s.customCats||[]; s.goals=s.goals||[]; s.accounts=s.accounts||[]; s.cards=s.cards||[]; s.realBalance = (typeof s.realBalance==='number') ? s.realBalance : null; s.realBalanceDate = s.realBalanceDate || null; s.realBalanceSetAt = s.realBalanceSetAt || null; s.userName = typeof s.userName==='string' ? s.userName : ''; return s; } }catch(e){}
+  return { txns: [], bills: [], budgets: {}, customCats: [], goals: [], accounts: [], cards: [], realBalance: null, realBalanceDate: null, realBalanceSetAt: null, userName:'', seeded:false };
 }
 function getCats(){ return CATS.concat(state.customCats||[]); }
 function save(){ try{ localStorage.setItem(KEY, JSON.stringify(state)); }catch(e){ toast("Não foi possível salvar localmente."); } }
@@ -405,11 +405,11 @@ function seedDemo(){
     {id:uid(),name:'Carteira',type:'Dinheiro',balance:180},
   ];
   state.cards = [{id:cardId,name:'Nubank',limit:5000}];
-  state.realBalance = 3380; state.realBalanceDate = d(1);
+  state.realBalance = 3380; state.realBalanceDate = d(1); state.realBalanceSetAt = Date.now();
   state.seeded = true; save(); render();
   toast("Dados de exemplo carregados.");
 }
-function clearDemo(){ state = {txns:[],bills:[],budgets:{},customCats:[],goals:[],accounts:[],cards:[],realBalance:null,realBalanceDate:null,userName:state.userName||'',seeded:false}; save(); render(); toast("Dados de demonstração apagados."); }
+function clearDemo(){ state = {txns:[],bills:[],budgets:{},customCats:[],goals:[],accounts:[],cards:[],realBalance:null,realBalanceDate:null,realBalanceSetAt:null,userName:state.userName||'',seeded:false}; save(); render(); toast("Dados de demonstração apagados."); }
 
 // ---- calculations ----
 function calc(){
@@ -423,7 +423,9 @@ function calc(){
   const unpaidBills = state.bills.filter(b=>!b.paid).reduce((s,b)=>s+b.amount,0);
   const {daysInMonth, today} = monthRange();
   const daysLeft = Math.max(1, daysInMonth - today + 1);
-  const available = Math.max(0, income - expense - unpaidBills);
+  const realBalance = computeRealBalance();
+  const usesRealBalance = realBalance!==null;
+  const available = Math.max(0, usesRealBalance ? realBalance - unpaidBills : income - expense - unpaidBills);
   const dailyAvg = available/daysLeft;
   const totalBudget = Object.values(state.budgets).reduce((s,v)=>s+v,0);
   const budgetUsedPct = totalBudget>0 ? Math.min(150, (expense/totalBudget*100)) : 0;
@@ -432,12 +434,15 @@ function calc(){
   health = Math.round(Math.max(0, Math.min(100, health)));
   const paceRatio = today>0 ? (expense/today) : 0;
   const projectedEnd = initialBalance + income - (paceRatio*daysInMonth);
-  return {income,expense,monthNet,initialBalance,balance,savingsRate,unpaidBills,daysLeft,available,dailyAvg,budgetUsedPct,totalBudget,overBudgetCats,health,projectedEnd,monthTxns};
+  return {income,expense,monthNet,initialBalance,balance,savingsRate,unpaidBills,daysLeft,available,dailyAvg,usesRealBalance,budgetUsedPct,totalBudget,overBudgetCats,health,projectedEnd,monthTxns};
 }
 function catExpense(cat, monthTxns){ return monthTxns.filter(t=>t.type==='expense'&&t.cat===cat).reduce((s,t)=>s+t.amount,0); }
 function computeRealBalance(){
   if(state.realBalance===null) return null;
-  const applied = state.txns.filter(t=>t.date>state.realBalanceDate).reduce((s,t)=>s+(t.type==='income'?t.amount:-t.amount),0);
+  const applied = state.txns.filter(t=>{
+    const createdAfterBalance = state.realBalanceSetAt && t.createdAt && t.createdAt>=state.realBalanceSetAt;
+    return t.date>state.realBalanceDate || createdAfterBalance;
+  }).reduce((s,t)=>s+(t.type==='income'?t.amount:-t.amount),0);
   return state.realBalance + applied;
 }
 
@@ -833,10 +838,10 @@ function saveTxn(){
   if(!desc || !amount || amount<=0 || !date){ toast("Preencha descrição, valor e data."); return; }
   if(editingId){
     const t = state.txns.find(x=>x.id===editingId);
-    Object.assign(t,{desc,amount,cat,date,cardId,type:currentType});
+    Object.assign(t,{desc,amount,cat,date,cardId,type:currentType,createdAt:t.createdAt||Date.now()});
     toast("Lançamento atualizado.");
   } else {
-    state.txns.push({id:uid(),desc,amount,cat,date,cardId,type:currentType});
+    state.txns.push({id:uid(),desc,amount,cat,date,cardId,type:currentType,createdAt:Date.now()});
     toast("Lançamento adicionado.");
   }
   save(); closeModal(); render();
@@ -904,7 +909,7 @@ function closeBalanceModal(){ document.getElementById('balModalBg').classList.re
 function saveBalance(){
   const v = parseFloat(document.getElementById('bal_val').value);
   if(isNaN(v) || v<0){ toast("Digite um valor válido."); return; }
-  state.realBalance = v; state.realBalanceDate = new Date().toISOString().slice(0,10);
+  state.realBalance = v; state.realBalanceDate = new Date().toISOString().slice(0,10); state.realBalanceSetAt = Date.now();
   save(); closeBalanceModal(); render(); toast("Saldo atualizado.");
 }
 
