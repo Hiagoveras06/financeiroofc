@@ -261,8 +261,10 @@ function calc(){
   const monthTxns = state.txns.filter(t=>inCurrentMonth(t.date));
   const income = monthTxns.filter(t=>t.type==='income').reduce((s,t)=>s+t.amount,0);
   const expense = monthTxns.filter(t=>t.type==='expense').reduce((s,t)=>s+t.amount,0);
-  const balance = income - expense;
-  const savingsRate = income>0 ? (balance/income*100) : 0;
+  const monthNet = income - expense;
+  const initialBalance = (typeof state.realBalance === 'number') ? state.realBalance : 0;
+  const balance = initialBalance + monthNet;
+  const savingsRate = income>0 ? (monthNet/income*100) : 0;
   const unpaidBills = state.bills.filter(b=>!b.paid).reduce((s,b)=>s+b.amount,0);
   const {daysInMonth, today} = monthRange();
   const daysLeft = Math.max(1, daysInMonth - today + 1);
@@ -274,8 +276,8 @@ function calc(){
   let health = 50 + Math.min(30, savingsRate*0.6) - overBudgetCats*8 - (unpaidBills>0 ? Math.min(10,unpaidBills/200) : 0);
   health = Math.round(Math.max(0, Math.min(100, health)));
   const paceRatio = today>0 ? (expense/today) : 0;
-  const projectedEnd = income - (paceRatio*daysInMonth);
-  return {income,expense,balance,savingsRate,unpaidBills,daysLeft,available,dailyAvg,budgetUsedPct,totalBudget,overBudgetCats,health,projectedEnd,monthTxns};
+  const projectedEnd = initialBalance + income - (paceRatio*daysInMonth);
+  return {income,expense,monthNet,initialBalance,balance,savingsRate,unpaidBills,daysLeft,available,dailyAvg,budgetUsedPct,totalBudget,overBudgetCats,health,projectedEnd,monthTxns};
 }
 function catExpense(cat, monthTxns){ return monthTxns.filter(t=>t.type==='expense'&&t.cat===cat).reduce((s,t)=>s+t.amount,0); }
 function computeRealBalance(){
@@ -335,7 +337,7 @@ function buildInsights(c){
   if(c.income===0 && c.expense===0){ out.push({i:'💡',t:'Adicione seus primeiros lançamentos para ver seu raio-x financeiro.'}); return out; }
   out.push(c.savingsRate>=0
     ? {i:'💡',t:`Você está economizando ${c.savingsRate.toFixed(1)}% da sua renda este mês.`}
-    : {i:'⚠️',t:`Suas despesas já ultrapassam suas receitas em ${fmt(Math.abs(c.balance))} este mês.`});
+    : {i:'⚠️',t:`Suas despesas já ultrapassam suas receitas em ${fmt(Math.abs(c.monthNet))} este mês.`});
   const subs = c.monthTxns.filter(t=>t.cat==='Assinaturas'&&t.type==='expense');
   if(subs.length){ const total=subs.reduce((s,t)=>s+t.amount,0); out.push({i:'💳',t:`Suas assinaturas somam ${fmt(total)}/mês (≈ ${fmt(total*12)}/ano).`}); }
   if(c.unpaidBills>0) out.push({i:'📅',t:`Você tem ${fmt(c.unpaidBills)} em contas ainda não pagas neste mês.`});
