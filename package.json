@@ -1,0 +1,17 @@
+{
+  "name": "financeiroofc",
+  "version": "1.0.0",
+  "description": "Copiloto Financeiro - Personal Finance Manager",
+  "type": "module",
+  "scripts": {
+    "dev": "npx http-server -p 3000",
+    "build": "echo 'No build step required for static HTML'",
+    "preview": "npx http-server dist -p 3000"
+  },
+  "dependencies": {
+    "@vercel/speed-insights": "^1.0.15"
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}
