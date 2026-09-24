@@ -20,6 +20,22 @@
   box-sizing:border-box;
 }
 *{box-sizing:border-box}
+.splash{position:fixed;inset:0;z-index:100;background:#07110E;display:grid;place-items:center;overflow:hidden;opacity:1;visibility:visible;transition:opacity .45s ease,visibility .45s ease;}
+.splash-active{overflow:hidden;}
+.splash::before{content:'';position:absolute;width:280px;height:280px;border-radius:50%;background:rgba(16,185,129,.12);filter:blur(42px);animation:splash-glow 1.8s ease-in-out infinite alternate;}
+.splash.is-hidden{opacity:0;visibility:hidden;pointer-events:none;}
+.splash-content{position:relative;display:flex;flex-direction:column;align-items:center;gap:14px;animation:splash-rise .8s cubic-bezier(.22,.8,.3,1) both;}
+.splash-logo{width:112px;height:112px;object-fit:cover;border-radius:25px;box-shadow:0 0 0 1px rgba(16,185,129,.45),0 18px 46px rgba(16,185,129,.2);animation:splash-logo-in .9s cubic-bezier(.22,.8,.3,1) both;}
+.splash-name{color:var(--white);font-family:'Manrope',sans-serif;font-size:17px;font-weight:800;letter-spacing:.04em;animation:splash-text-in .7s .25s ease both;}
+.splash-subtitle{color:#8fa69b;font-size:11px;letter-spacing:.16em;text-transform:uppercase;animation:splash-text-in .7s .38s ease both;}
+.splash-loader{width:54px;height:2px;margin-top:8px;background:rgba(255,255,255,.12);overflow:hidden;border-radius:4px;animation:splash-text-in .7s .45s ease both;}
+.splash-loader::after{content:'';display:block;width:45%;height:100%;background:var(--em);border-radius:4px;animation:splash-load 1.15s ease-in-out infinite;}
+@keyframes splash-logo-in{from{opacity:0;transform:scale(.78) rotate(-5deg)}to{opacity:1;transform:scale(1) rotate(0)}}
+@keyframes splash-rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+@keyframes splash-text-in{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
+@keyframes splash-glow{from{transform:scale(.86);opacity:.65}to{transform:scale(1.12);opacity:1}}
+@keyframes splash-load{from{transform:translateX(-120%)}to{transform:translateX(250%)}}
+@media(prefers-reduced-motion:reduce){.splash-content,.splash-logo,.splash-name,.splash-subtitle,.splash-loader,.splash::before,.splash-loader::after{animation:none}.splash-logo,.splash-name,.splash-subtitle,.splash-loader{opacity:1}}
 html{scroll-padding-top:env(safe-area-inset-top,0px);touch-action:manipulation}
 body{margin:0;background:var(--bg);color:var(--white);font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased;position:relative;overflow-x:hidden;
   background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
@@ -210,7 +226,15 @@ h2.sec{font-size:15px;text-transform:none;color:var(--white);margin:0 0 14px;fon
 }
 </style>
 </head>
-<body>
+<body class="splash-active">
+<div class="splash" id="splash" role="status" aria-label="Carregando o Copiloto Financeiro">
+  <div class="splash-content">
+    <img class="splash-logo" src="../logotipo/logo.png" alt="Finanças Veras">
+    <div class="splash-name">Copiloto Financeiro</div>
+    <div class="splash-subtitle">Finanças Veras</div>
+    <div class="splash-loader" aria-hidden="true"></div>
+  </div>
+</div>
 <div class="wrap" id="app"></div>
 <button class="fab" onclick="openModal()" aria-label="Novo lançamento">+</button>
 
@@ -723,11 +747,11 @@ function exportReport(period){
   </style></head><body><main class="sheet"><header class="header"><div class="brand"><img src="${logoUrl}" alt=""><div><div class="brand-name">Copiloto Financeiro</div><div class="brand-sub">Relatório pessoal de finanças</div></div></div><div class="period"><strong>${title}</strong>${range}<br>Gerado em ${reportDateLabel(new Date())}</div></header><section class="intro"><div class="eyebrow">Resumo de ${user}</div><h1>${title}</h1><p>Uma visão clara das suas movimentações para ajudar nas próximas decisões.</p></section><section class="summary"><div class="metric"><small>Receitas</small><strong class="positive">${fmt(data.income)}</strong></div><div class="metric"><small>Despesas</small><strong>${fmt(data.expense)}</strong></div><div class="metric"><small>Resultado do período</small><strong class="${netClass}">${fmt(data.net)}</strong></div><div class="metric"><small>Score atual</small><strong>${current.health}/100</strong></div></section><section class="section"><h2>Despesas por categoria</h2><p class="section-note">Categorias com maior participação no período.</p><table><thead><tr><th>Categoria</th><th style="text-align:right">Total</th><th style="width:38%">Participação</th></tr></thead><tbody>${categoryRows}</tbody></table></section><section class="section"><h2>Movimentações</h2><table><thead><tr><th>Data</th><th>Descrição</th><th>Categoria</th><th style="text-align:right">Valor</th></tr></thead><tbody>${transactionRows}</tbody></table></section><section class="section two-col"><div><h2>Contas pendentes</h2><ul class="bills">${billRows}</ul></div><div><h2>Leitura do score</h2><p class="section-note" style="line-height:1.6">${healthLabel(current.health,data.txns.length>0)}</p></div></section><footer class="footer"><span>Copiloto Financeiro</span><span>Dados salvos localmente neste dispositivo</span></footer></main><a class="back-btn" href="${appUrl}">Voltar ao aplicativo</a><button id="printReport" class="print-btn" type="button" onclick="window.print()">Salvar como PDF</button><script>document.getElementById('printReport').addEventListener('click',function(){window.focus();window.print();});<\/script></body></html>`;
   const balanceText = data.currentBalance===null ? 'Não informado' : fmt(data.currentBalance);
   const pdfFileName = `${period}-relatorio-financeiro.pdf`;
-  const pdfButtonCode = `onclick="if(window.html2pdf){html2pdf().set({margin:10,filename:'${pdfFileName}',image:{type:'jpeg',quality:.98},html2canvas:{scale:2,useCORS:true,backgroundColor:'#ffffff'},jsPDF:{unit:'mm',format:'a4',orientation:'portrait'}}).from(document.querySelector('.sheet')).save()}else{window.print()}"`;
+  const pdfButtonCode = `onclick="if(window.html2pdf){html2pdf().set({margin:[8,8,8,8],filename:'${pdfFileName}',pagebreak:{mode:['css','legacy'],avoid:['.metric','tr','.section h2']},image:{type:'jpeg',quality:.98},html2canvas:{scale:2,useCORS:true,backgroundColor:'#ffffff',scrollY:0,x:0,y:0},jsPDF:{unit:'mm',format:'a4',orientation:'portrait'}}).from(document.querySelector('.sheet')).save()}else{window.print()}"`;
   const reportDocument = reportHtml
     .replace(/<img src="[\s\S]*?" alt="">/,logoMarkup)
     .replace('<head>','<head><script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></scr'+'ipt>')
-    .replace('<style>','<style>.brand-logo{display:block!important;width:58px!important;height:58px!important;flex:none!important}.brand{align-items:center!important}</style><style>')
+    .replace('<style>','<style>@page{size:A4;margin:0}.sheet{margin:0 auto!important}.header,.intro,.summary,.metric,.section h2,tr{break-inside:avoid;page-break-inside:avoid}.brand-logo{display:block!important;width:58px!important;height:58px!important;flex:none!important}.brand{align-items:center!important}</style><style>')
     .replace('body{margin:0;background:#edf3ef','body{-webkit-print-color-adjust:exact;print-color-adjust:exact;margin:0;background:#edf3ef')
     .replace('grid-template-columns:repeat(4,1fr)','grid-template-columns:repeat(5,1fr)')
     .replace('<div class="metric"><small>Score atual</small>', `<div class="metric"><small>Saldo real atual</small><strong>${balanceText}</strong></div><div class="metric"><small>Score atual</small>`)
@@ -1025,6 +1049,13 @@ function saveUserName(){
 
 render();
 if(!state.userName) setTimeout(openWelcomeModal, 0);
+setTimeout(()=>{
+  const splash = document.getElementById('splash');
+  if(!splash) return;
+  splash.classList.add('is-hidden');
+  document.body.classList.remove('splash-active');
+  setTimeout(()=>splash.remove(),500);
+},1400);
 </script>
 </body>
 </html>
