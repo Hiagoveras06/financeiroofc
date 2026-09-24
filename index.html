@@ -155,6 +155,94 @@ h2.sec{font-size:15px;text-transform:none;color:var(--white);margin:0 0 14px;fon
 .budget-set{display:flex;align-items:center;gap:8px;margin-top:8px;font-size:12px;color:var(--gray);flex-wrap:wrap;}
 .budget-set input{width:110px;background:var(--card2);border:1px solid var(--line);color:var(--white);border-radius:6px;padding:6px 8px;font-size:13px;}
 .budget-set select{background:var(--card2);border:1px solid var(--line);color:var(--white);border-radius:6px;padding:6px 8px;font-size:13px;}
+.goals-shell{--goal-accent:#34D399;--goal-blue:#60A5FA;background:linear-gradient(145deg,rgba(18,39,31,.98),rgba(13,25,21,.98));border:1px solid rgba(111,220,177,.2);border-radius:22px;padding:24px;margin-bottom:16px;overflow:hidden;position:relative;box-shadow:0 18px 45px rgba(0,0,0,.12);}
+.goals-shell::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 100% 0,rgba(52,211,153,.12),transparent 34%),linear-gradient(120deg,rgba(96,165,250,.06),transparent 45%);pointer-events:none;}
+.goals-content{position:relative;z-index:1;}
+.goals-header{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;margin-bottom:20px;}
+.goals-eyebrow{color:#7DE6B7;font-size:11px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;margin-bottom:8px;}
+.goals-header h2{font-size:26px;margin:0 0 6px;line-height:1.1;}
+.goals-header p{color:#A7BDB2;font-size:13px;margin:0;line-height:1.5;}
+.goals-header .btn{flex-shrink:0;white-space:nowrap;}
+.goals-overview{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(164,221,196,.12);border:1px solid rgba(164,221,196,.12);border-radius:14px;overflow:hidden;margin-bottom:20px;}
+.goal-overview-item{background:rgba(5,18,13,.36);padding:14px 16px;min-width:0;}
+.goal-overview-item .label{display:block;color:#91AA9E;font-size:11px;margin-bottom:5px;}
+.goal-overview-item strong{display:block;color:#F3FBF7;font:800 18px/1.15 'Manrope',sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.goal-overview-item .accent{color:#6EE7B7;}
+.goal-featured{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(190px,.75fr);gap:22px;padding:22px;border:1px solid rgba(115,222,181,.26);border-radius:17px;background:linear-gradient(135deg,rgba(26,65,49,.8),rgba(12,31,24,.72));margin-bottom:18px;position:relative;overflow:hidden;}
+.goal-featured::after{content:'★';position:absolute;right:20px;top:-8px;font-size:108px;line-height:1;color:rgba(110,231,183,.06);transform:rotate(12deg);}
+.goal-featured-main,.goal-featured-side{position:relative;z-index:1;min-width:0;}
+.goal-featured-kicker{display:inline-flex;align-items:center;gap:6px;color:#A7F3D0;font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;margin-bottom:13px;}
+.goal-featured-title{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
+.goal-icon{width:42px;height:42px;display:grid;place-items:center;border-radius:13px;background:color-mix(in srgb,var(--goal-accent) 18%,transparent);border:1px solid color-mix(in srgb,var(--goal-accent) 42%,transparent);font-size:21px;flex-shrink:0;}
+.goal-featured-title h3{font-size:22px;margin:0;overflow-wrap:anywhere;}
+.goal-featured-amount{font:800 31px/1.1 'Manrope',sans-serif;color:#F7FFFB;letter-spacing:-.02em;}
+.goal-featured-amount span{font:500 13px 'Inter',sans-serif;color:#91AA9E;}
+.goal-progress-row{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin:17px 0 7px;}
+.goal-progress-row .percent{font:800 15px 'Manrope',sans-serif;color:var(--goal-accent);}
+.goal-progress-row .progress-label{color:#9BB5A8;font-size:12px;}
+.goal-progress{height:10px;background:rgba(3,14,10,.58);border-radius:99px;overflow:hidden;box-shadow:inset 0 1px 2px rgba(0,0,0,.2);}
+.goal-progress-fill{height:100%;width:var(--goal-pct);border-radius:inherit;background:linear-gradient(90deg,var(--goal-accent),color-mix(in srgb,var(--goal-accent) 68%,#fff));transition:width .55s cubic-bezier(.22,.8,.3,1);}
+.goal-featured-meta{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:16px;color:#A7BDB2;font-size:12px;}
+.goal-featured-meta strong{color:#F3FBF7;font-weight:700;}
+.goal-featured-side{display:flex;align-items:center;justify-content:center;gap:18px;border-left:1px solid rgba(164,221,196,.13);padding-left:20px;}
+.goal-ring{width:124px;height:124px;position:relative;flex-shrink:0;}
+.goal-ring svg{width:100%;height:100%;transform:rotate(-90deg);}
+.goal-ring-track,.goal-ring-progress{fill:none;stroke-width:3.2;}
+.goal-ring-track{stroke:rgba(174,211,193,.14);}
+.goal-ring-progress{stroke:var(--goal-accent);stroke-linecap:round;stroke-dasharray:100;stroke-dashoffset:calc(100 - var(--goal-pct));transition:stroke-dashoffset .65s cubic-bezier(.22,.8,.3,1);}
+.goal-ring-label{position:absolute;inset:0;display:grid;place-items:center;text-align:center;color:#F7FFFB;font:800 23px/1 'Manrope',sans-serif;}
+.goal-ring-label small{display:block;color:#9BB5A8;font:500 10px 'Inter',sans-serif;margin-top:4px;}
+.goal-plan{min-width:0;}
+.goal-plan-label{color:#A7BDB2;font-size:11px;margin-bottom:6px;}
+.goal-plan strong{display:block;color:#F7FFFB;font:800 20px/1.15 'Manrope',sans-serif;overflow-wrap:anywhere;}
+.goal-plan p{color:#9BB5A8;font-size:11px;line-height:1.4;margin:6px 0 0;}
+.goal-insight{margin-top:16px;padding:10px 12px;border-radius:10px;background:rgba(5,18,13,.38);border:1px solid rgba(164,221,196,.1);color:#C3D6CC;font-size:12px;line-height:1.45;}
+.goal-insight b{color:#A7F3D0;}
+.goals-toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:12px;}
+.goals-toolbar-title{color:#E8F4EE;font:700 14px 'Manrope',sans-serif;}
+.goal-filters{display:flex;gap:6px;overflow:auto;scrollbar-width:none;}
+.goal-filter{border:1px solid rgba(164,221,196,.15);background:rgba(5,18,13,.28);color:#92AA9F;padding:7px 11px;border-radius:8px;font:600 11px 'Inter',sans-serif;cursor:pointer;white-space:nowrap;transition:all .2s ease;}
+.goal-filter:hover,.goal-filter.active{color:#DFF9EA;border-color:rgba(110,231,183,.55);background:rgba(16,185,129,.14);}
+.goals-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;}
+.goal-card{--goal-accent:#34D399;background:rgba(7,20,15,.68);border:1px solid rgba(164,221,196,.13);border-radius:16px;padding:17px;min-width:0;transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease;animation:goal-card-in .45s both;}
+.goal-card:hover{transform:translateY(-2px);border-color:color-mix(in srgb,var(--goal-accent) 50%,transparent);box-shadow:0 10px 25px rgba(0,0,0,.16);}
+@keyframes goal-card-in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.goal-card-top{display:flex;align-items:flex-start;gap:10px;min-width:0;}
+.goal-card-top .goal-icon{width:36px;height:36px;border-radius:11px;font-size:18px;}
+.goal-card-title{min-width:0;flex:1;}
+.goal-card-title h3{font-size:15px;line-height:1.25;margin:1px 0 4px;overflow-wrap:anywhere;}
+.goal-card-title .goal-status{display:inline-flex;align-items:center;gap:5px;color:#9BB5A8;font-size:10px;font-weight:700;}
+.goal-status::before{content:'';width:6px;height:6px;border-radius:50%;background:#7B8F85;}
+.goal-status.ok{color:#6EE7B7;}.goal-status.ok::before{background:#34D399;}
+.goal-status.warn{color:#F6D889;}.goal-status.warn::before{background:#FBBF24;}
+.goal-status.ahead{color:#93C5FD;}.goal-status.ahead::before{background:#60A5FA;}
+.goal-status.done{color:#A7F3D0;}.goal-status.done::before{background:#34D399;box-shadow:0 0 0 3px rgba(52,211,153,.12);}
+.goal-menu-actions{display:flex;gap:4px;flex-shrink:0;}
+.goal-menu-actions button{background:transparent;border:0;color:#769187;cursor:pointer;font-size:12px;padding:5px;border-radius:6px;}
+.goal-menu-actions button:hover{background:rgba(255,255,255,.06);color:#E8F4EE;}
+.goal-card-amount{font:800 22px/1.1 'Manrope',sans-serif;color:#F7FFFB;margin-top:16px;}
+.goal-card-amount span{font:500 11px 'Inter',sans-serif;color:#91AA9E;}
+.goal-card .goal-progress{height:8px;margin-top:13px;}
+.goal-card-details{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:13px;}
+.goal-detail{color:#849C91;font-size:10px;line-height:1.35;min-width:0;}
+.goal-detail strong{display:block;color:#DDEBE3;font-size:12px;margin-top:2px;overflow-wrap:anywhere;}
+.goal-card-bottom{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:15px;padding-top:12px;border-top:1px solid rgba(164,221,196,.1);}
+.goal-card-bottom .goal-insight{margin:0;padding:0;background:none;border:0;font-size:10px;min-width:0;}
+.goal-add-value{background:rgba(16,185,129,.14);border:1px solid rgba(52,211,153,.3);color:#A7F3D0;padding:7px 9px;border-radius:8px;font:700 11px 'Inter',sans-serif;cursor:pointer;white-space:nowrap;}
+.goal-add-value:hover{background:rgba(16,185,129,.24);}
+.goal-empty{border:1px dashed rgba(164,221,196,.2);border-radius:14px;padding:28px 16px;text-align:center;color:#91AA9E;grid-column:1/-1;}
+.goal-empty strong{display:block;color:#E8F4EE;font:700 15px 'Manrope',sans-serif;margin-bottom:5px;}
+.goal-form-intro{color:#A7BDB2;font-size:12px;line-height:1.45;margin:-7px 0 16px;}
+.goal-choice-row{display:flex;gap:7px;flex-wrap:wrap;}
+.goal-choice{flex:1;min-width:54px;border:1px solid var(--line);background:var(--card2);color:var(--gray);padding:8px 7px;border-radius:8px;cursor:pointer;font-size:12px;}
+.goal-choice.active{border-color:var(--em);color:var(--em);background:rgba(16,185,129,.12);}
+.goal-icon-choice{font-size:20px;line-height:1;}
+.goal-modal-title{display:flex;align-items:center;gap:10px;}
+.goal-modal-title .goal-icon{width:34px;height:34px;border-radius:10px;font-size:17px;}
+.goal-add-modal .quick-values{display:flex;gap:7px;margin-top:8px;}
+.goal-add-modal .quick-values button{flex:1;background:var(--card2);border:1px solid var(--line);color:var(--gray);padding:8px 5px;border-radius:8px;cursor:pointer;font-size:12px;}
+.goal-add-modal .quick-values button:hover{border-color:var(--em);color:var(--em);}
+@media(prefers-reduced-motion:reduce){.goal-card{animation:none}.goal-progress-fill,.goal-ring-progress{transition:none;}}
 @media(max-width:640px){
   .wrap{padding:20px 12px calc(88px + env(safe-area-inset-bottom,0px));}
   .top{align-items:stretch;gap:16px;margin-bottom:16px;}
@@ -205,6 +293,25 @@ h2.sec{font-size:15px;text-transform:none;color:var(--white);margin:0 0 14px;fon
   .modal{max-height:calc(100vh - 20px);padding:18px;border-radius:14px;}
   .modal-actions{position:sticky;bottom:0;background:var(--card);padding-top:10px;}
   .modal-actions .btn{min-height:42px;}
+  .goals-shell{padding:16px 12px;border-radius:16px;}
+  .goals-header{display:block;margin-bottom:16px;}
+  .goals-header h2{font-size:22px;}
+  .goals-header .btn{width:100%;margin-top:14px;}
+  .goals-overview{grid-template-columns:repeat(2,1fr);margin-bottom:14px;}
+  .goal-overview-item{padding:12px 10px;}
+  .goal-overview-item strong{font-size:16px;}
+  .goal-featured{display:block;padding:16px;margin-bottom:15px;}
+  .goal-featured-title h3{font-size:19px;}
+  .goal-featured-amount{font-size:27px;}
+  .goal-featured-side{border-left:0;border-top:1px solid rgba(164,221,196,.13);margin-top:18px;padding:18px 0 0;justify-content:flex-start;}
+  .goal-ring{width:92px;height:92px;}
+  .goal-ring-label{font-size:18px;}
+  .goal-plan strong{font-size:17px;}
+  .goals-toolbar{display:block;margin-bottom:12px;}
+  .goal-filters{margin-top:10px;padding-bottom:2px;}
+  .goal-filter{padding:8px 10px;}
+  .goals-grid{grid-template-columns:1fr;gap:10px;}
+  .goal-card{padding:15px;}
   .fab{right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));width:52px;height:52px;}
   .toast{bottom:calc(16px + env(safe-area-inset-bottom,0px));max-width:calc(100vw - 32px);text-align:center;}
 }
@@ -270,15 +377,35 @@ h2.sec{font-size:15px;text-transform:none;color:var(--white);margin:0 0 14px;fon
 </div>
 <div class="modal-bg" id="goalModalBg">
   <div class="modal">
-    <h3 id="goalModalTitle">Nova meta</h3>
-    <div class="field"><label>Nome da meta</label><input id="g_name" placeholder="Ex: Reserva de emergência"></div>
-    <div class="field"><label>Valor objetivo (R$)</label><input id="g_target" type="number" step="0.01"></div>
-    <div class="field"><label>Valor atual (R$)</label><input id="g_current" type="number" step="0.01" placeholder="0,00"></div>
-    <div class="field"><label>Prazo</label><input id="g_deadline" type="date"></div>
+    <div class="goal-modal-title"><div class="goal-icon" id="goalModalIconPreview">🎯</div><h3 id="goalModalTitle">Nova meta</h3></div>
+    <p class="goal-form-intro">Dê um nome ao que você quer conquistar e acompanhe cada passo até lá.</p>
+    <div class="field"><label for="g_name">O que você quer conquistar?</label><input id="g_name" placeholder="Ex: Comprar um notebook"></div>
+    <div class="field"><label for="g_target">Quanto você precisa? (R$)</label><input id="g_target" type="number" step="0.01" min="0"></div>
+    <div class="field"><label for="g_current">Quanto já possui? (R$)</label><input id="g_current" type="number" step="0.01" min="0" placeholder="0,00"></div>
+    <div class="field"><label for="g_deadline">Até quando?</label><input id="g_deadline" type="date"></div>
+    <div class="field"><label>Ícone</label><div class="goal-choice-row" id="goalIconChoices"><button type="button" class="goal-choice goal-icon-choice" data-icon="🛟" onclick="selectGoalIcon('🛟')">🛟</button><button type="button" class="goal-choice goal-icon-choice" data-icon="🏠" onclick="selectGoalIcon('🏠')">🏠</button><button type="button" class="goal-choice goal-icon-choice" data-icon="🚗" onclick="selectGoalIcon('🚗')">🚗</button><button type="button" class="goal-choice goal-icon-choice" data-icon="✈️" onclick="selectGoalIcon('✈️')">✈️</button><button type="button" class="goal-choice goal-icon-choice" data-icon="💻" onclick="selectGoalIcon('💻')">💻</button><button type="button" class="goal-choice goal-icon-choice" data-icon="🎓" onclick="selectGoalIcon('🎓')">🎓</button><button type="button" class="goal-choice goal-icon-choice" data-icon="💍" onclick="selectGoalIcon('💍')">💍</button><button type="button" class="goal-choice goal-icon-choice" data-icon="📱" onclick="selectGoalIcon('📱')">📱</button><button type="button" class="goal-choice goal-icon-choice" data-icon="🎮" onclick="selectGoalIcon('🎮')">🎮</button><button type="button" class="goal-choice goal-icon-choice" data-icon="💰" onclick="selectGoalIcon('💰')">💰</button></div></div>
+    <div class="field"><label>Cor de destaque</label><div class="goal-choice-row" id="goalColorChoices"><button type="button" class="goal-choice" data-color="#34D399" onclick="selectGoalColor('#34D399')" style="height:30px;background:#34D399;opacity:.82" aria-label="Selecionar verde"></button><button type="button" class="goal-choice" data-color="#60A5FA" onclick="selectGoalColor('#60A5FA')" style="height:30px;background:#60A5FA;opacity:.82" aria-label="Selecionar azul"></button><button type="button" class="goal-choice" data-color="#A78BFA" onclick="selectGoalColor('#A78BFA')" style="height:30px;background:#A78BFA;opacity:.82" aria-label="Selecionar roxo"></button><button type="button" class="goal-choice" data-color="#F59E0B" onclick="selectGoalColor('#F59E0B')" style="height:30px;background:#F59E0B;opacity:.82" aria-label="Selecionar laranja"></button><button type="button" class="goal-choice" data-color="#F472B6" onclick="selectGoalColor('#F472B6')" style="height:30px;background:#F472B6;opacity:.82" aria-label="Selecionar rosa"></button></div></div>
+    <div class="field"><label for="g_priority">Prioridade</label><select id="g_priority"><option value="normal">Normal</option><option value="medium">Importante</option><option value="high">Prioridade</option></select></div>
     <div class="modal-actions">
       <button class="btn ghost" onclick="closeGoalModal()">Cancelar</button>
-      <button class="btn" onclick="saveGoal()">Salvar</button>
+      <button class="btn" onclick="saveGoal()">Salvar meta</button>
     </div>
+  </div>
+</div>
+<div class="modal-bg" id="goalValueModalBg">
+  <div class="modal goal-add-modal">
+    <h3>Adicionar valor</h3>
+    <p class="hint" id="goalValueHint" style="margin-top:-4px;">Cada aporte aproxima você do seu objetivo.</p>
+    <div class="field"><label for="g_value">Quanto você deseja adicionar?</label><input id="g_value" type="number" step="0.01" min="0.01" placeholder="0,00"></div>
+    <div class="quick-values"><button type="button" onclick="setGoalValue(50)">R$ 50</button><button type="button" onclick="setGoalValue(100)">R$ 100</button><button type="button" onclick="setGoalValue(200)">R$ 200</button></div>
+    <div class="modal-actions"><button class="btn ghost" onclick="closeGoalValueModal()">Cancelar</button><button class="btn" onclick="addGoalValue()">Adicionar valor</button></div>
+  </div>
+</div>
+<div class="modal-bg" id="goalDeleteModalBg">
+  <div class="modal">
+    <h3>Excluir esta meta?</h3>
+    <p class="hint" id="goalDeleteHint">Essa ação remove o objetivo salvo neste navegador.</p>
+    <div class="modal-actions"><button class="btn ghost" onclick="closeGoalDeleteModal()">Cancelar</button><button class="btn" style="background:var(--red);color:#210808;" onclick="confirmDeleteGoal()">Excluir meta</button></div>
   </div>
 </div>
 <div class="modal-bg" id="accModalBg">
@@ -337,6 +464,16 @@ h2.sec{font-size:15px;text-transform:none;color:var(--white);margin:0 0 14px;fon
     <button class="btn" id="welcomeSaveButton" onclick="saveUserName()">Continuar</button>
   </div>
 </div>
+<div class="modal-bg" id="demoConfirmModalBg">
+  <div class="modal">
+    <h3>Carregar demonstração?</h3>
+    <p class="hint">Os dados atuais deste navegador serão substituídos por dados de exemplo. Seus lançamentos, contas, cartões, metas e orçamentos não poderão ser recuperados.</p>
+    <div class="modal-actions">
+      <button class="btn ghost" onclick="closeDemoConfirm()">Cancelar</button>
+      <button class="btn" onclick="confirmDemo()">Continuar</button>
+    </div>
+  </div>
+</div>
 <div class="modal-bg" id="categoryModalBg">
   <div class="modal">
     <h3>Nova categoria</h3>
@@ -355,6 +492,7 @@ const CATS = ["Moradia","Alimentação","Transporte","Saúde","Educação","Laze
 const KEY = "copiloto_financeiro_v1";
 let state = load();
 let editingId = null, currentType = "expense", editingGoalId = null, editingAccId = null, editingCardId = null, editingBillId = null, categoryTargetSelect = null;
+let selectedGoalIcon = '🛟', selectedGoalColor = '#34D399', editingGoalValueId = null, pendingDeleteGoalId = null;
 
 function load(){
   try{ const raw = localStorage.getItem(KEY); if(raw){ const s = JSON.parse(raw); s.customCats=s.customCats||[]; s.goals=s.goals||[]; s.accounts=s.accounts||[]; s.cards=s.cards||[]; s.realBalance = (typeof s.realBalance==='number') ? s.realBalance : null; s.realBalanceDate = s.realBalanceDate || null; s.realBalanceSetAt = s.realBalanceSetAt || null; s.userName = typeof s.userName==='string' ? s.userName : ''; return s; } }catch(e){}
@@ -410,6 +548,9 @@ function seedDemo(){
   toast("Dados de exemplo carregados.");
 }
 function clearDemo(){ state = {txns:[],bills:[],budgets:{},customCats:[],goals:[],accounts:[],cards:[],realBalance:null,realBalanceDate:null,realBalanceSetAt:null,userName:state.userName||'',seeded:false}; save(); render(); toast("Dados de demonstração apagados."); }
+function openDemoConfirm(){ document.getElementById('demoConfirmModalBg').classList.add('open'); }
+function closeDemoConfirm(){ document.getElementById('demoConfirmModalBg').classList.remove('open'); }
+function confirmDemo(){ closeDemoConfirm(); seedDemo(); }
 
 // ---- calculations ----
 function calc(){
@@ -461,19 +602,79 @@ function healthLabel(h, hasData=true){
   return "Excelente! Seu dinheiro está muito bem organizado.";
 }
 
-function goalStatus(g){
-  const pct = g.target>0 ? Math.min(100, g.current/g.target*100) : 0;
-  let verdict = {emoji:'⚪',text:'Defina um prazo para ver a recomendação mensal',cls:'neutral'};
-  if(g.current>=g.target){ verdict = {emoji:'🟢',text:'Meta concluída! 🎉',cls:'ok'}; }
-  else if(g.deadline){
-    const today = new Date(); today.setHours(0,0,0,0);
-    const dl = new Date(g.deadline+'T00:00:00');
-    const months = Math.max(1, Math.round((dl-today)/(1000*60*60*24*30)));
-    const monthly = Math.max(0,(g.target-g.current)/months);
-    verdict = dl<today ? {emoji:'🔴',text:'Prazo já passou — ajuste a data ou o valor.',cls:'bad'} : {emoji:'🎯',text:`Guarde ${fmt(monthly)}/mês para chegar lá.`,cls:'ok'};
-  }
-  return {pct, verdict};
+const GOAL_ICONS = ['🛟','🏠','🚗','✈️','💻','🎓','💍','📱','🎮','💰'];
+const GOAL_COLORS = ['#34D399','#60A5FA','#A78BFA','#F59E0B','#F472B6'];
+let activeGoalFilter = 'all';
+
+function goalMonthsLeft(deadline){
+  if(!deadline) return null;
+  const today = new Date(); today.setHours(0,0,0,0);
+  const end = new Date(deadline+'T23:59:59');
+  if(end<=today) return 0;
+  return Math.max(1, Math.ceil((end-today)/(1000*60*60*24*30.4375)));
 }
+function goalDateLabel(deadline){
+  if(!deadline) return 'Sem prazo definido';
+  return new Date(deadline+'T00:00:00').toLocaleDateString('pt-BR',{month:'long',year:'numeric'});
+}
+function goalMetrics(g){
+  const target = Number(g.target)||0;
+  const current = Math.max(0,Number(g.current)||0);
+  const pct = target>0 ? Math.min(100,current/target*100) : 0;
+  const remaining = Math.max(0,target-current);
+  const monthsLeft = goalMonthsLeft(g.deadline);
+  const monthlyNeed = remaining>0 && monthsLeft ? remaining/monthsLeft : 0;
+  let status = {key:'neutral',label:g.deadline?'Plano definido':'Sem prazo',emoji:'◦'};
+  if(pct>=100) status = {key:'done',label:'Concluída',emoji:'🏆'};
+  else if(g.createdAt && monthsLeft!==null){
+    const created = new Date(g.createdAt); created.setHours(0,0,0,0);
+    const deadline = new Date(g.deadline+'T00:00:00');
+    const totalDays = Math.max(1,deadline-created);
+    const elapsedPct = Math.min(100,Math.max(0,(Date.now()-created)/totalDays*100));
+    if(pct>=elapsedPct+12) status = {key:'ahead',label:'Adiantada',emoji:'↗'};
+    else if(pct+12>=elapsedPct) status = {key:'ok',label:'No ritmo',emoji:'✓'};
+    else status = {key:'warn',label:'Ajuste de ritmo',emoji:'•'};
+  }
+  return {target,current,pct,remaining,monthsLeft,monthlyNeed,status};
+}
+function goalStatus(g){
+  const metrics = goalMetrics(g);
+  let verdict = {emoji:'⚪',text:g.deadline?`Guarde ${fmt(metrics.monthlyNeed)}/mês para chegar lá.`:'Defina um prazo para ver a recomendação mensal',cls:'neutral'};
+  if(metrics.status.key==='done') verdict = {emoji:'🏆',text:'Meta concluída! Você chegou lá.',cls:'ok'};
+  else if(metrics.status.key==='ahead') verdict = {emoji:'🔵',text:'Você está acima do ritmo necessário.',cls:'ok'};
+  else if(metrics.status.key==='warn') verdict = {emoji:'🟡',text:'Ajuste seus aportes para se aproximar do prazo planejado.',cls:'warn'};
+  return {pct:metrics.pct,verdict,metrics};
+}
+function goalAccent(g,index=0){ return g.color || GOAL_COLORS[index%GOAL_COLORS.length]; }
+function goalInsight(metrics){
+  if(metrics.status.key==='done') return 'Você alcançou seu objetivo.';
+  if(!metrics.monthsLeft) return 'Adicione um prazo para o Copiloto calcular seu plano.';
+  if(metrics.monthlyNeed>0) return `O plano pede cerca de ${fmt(metrics.monthlyNeed)}/mês.`;
+  return `Faltam ${fmt(metrics.remaining)} para concluir.`;
+}
+function goalSummary(){
+  const target = state.goals.reduce((sum,g)=>sum+(Number(g.target)||0),0);
+  const current = state.goals.reduce((sum,g)=>sum+Math.min(Number(g.current)||0,Number(g.target)||0),0);
+  return {count:state.goals.length,current,target,pct:target>0?Math.min(100,current/target*100):0};
+}
+function getFeaturedGoal(){
+  return state.goals.filter(g=>goalMetrics(g).status.key!=='done').sort((a,b)=>{
+    if(a.deadline && !b.deadline) return -1;
+    if(!a.deadline && b.deadline) return 1;
+    if(a.deadline && b.deadline) return a.deadline.localeCompare(b.deadline);
+    return goalMetrics(b).pct-goalMetrics(a).pct;
+  })[0] || state.goals[0] || null;
+}
+function filteredGoals(){
+  return state.goals.filter(g=>{
+    const status = goalMetrics(g).status.key;
+    if(activeGoalFilter==='done') return status==='done';
+    if(activeGoalFilter==='active') return status!=='done';
+    if(activeGoalFilter==='priority') return g.priority==='high';
+    return true;
+  });
+}
+function setGoalFilter(filter){ activeGoalFilter=filter; render(); }
 function buildAlerts(c){
   const out = [];
   getCats().forEach(cat=>{
@@ -508,6 +709,50 @@ function buildInsights(c){
   if(state.goals.length){ const near = state.goals.find(g=>g.current<g.target); if(near) out.push({i:'🎯',t:`Faltam ${fmt(near.target-near.current)} para atingir a meta "${near.name}".`}); }
   out.push({i:'📈',t: c.projectedEnd>=0 ? `Mantendo o ritmo atual, você deve terminar o mês com aproximadamente ${fmt(c.projectedEnd)}.` : `Mantendo o ritmo atual, você deve terminar o mês no negativo, cerca de ${fmt(c.projectedEnd)}.`});
   return out.slice(0,5);
+}
+
+function renderGoalCard(g,index){
+  const m = goalMetrics(g); const status = m.status;
+  const accent = goalAccent(g,index);
+  const deadline = g.deadline ? `Até ${goalDateLabel(g.deadline)}` : 'Sem prazo definido';
+  return `<article class="goal-card" style="--goal-accent:${accent};animation-delay:${Math.min(index,5)*.06}s">
+    <div class="goal-card-top">
+      <div class="goal-icon" aria-hidden="true">${safeText(g.icon||GOAL_ICONS[index%GOAL_ICONS.length])}</div>
+      <div class="goal-card-title"><h3>${safeText(g.name)}</h3><span class="goal-status ${status.key}">${status.emoji} ${status.label}</span></div>
+      <div class="goal-menu-actions"><button onclick="editGoal('${g.id}')" aria-label="Editar meta ${safeText(g.name)}" title="Editar">✎</button><button onclick="openGoalDeleteModal('${g.id}')" aria-label="Excluir meta ${safeText(g.name)}" title="Excluir">×</button></div>
+    </div>
+    <div class="goal-card-amount">${fmt(m.current)} <span>de ${fmt(m.target)}</span></div>
+    <div class="goal-progress-row"><span class="progress-label">Progresso</span><span class="percent">${m.pct.toFixed(1)}%</span></div>
+    <div class="goal-progress" aria-label="${m.pct.toFixed(1)}% concluído"><div class="goal-progress-fill" style="--goal-pct:${m.pct}%"></div></div>
+    <div class="goal-card-details"><div class="goal-detail">Prazo<strong>${deadline}</strong></div><div class="goal-detail">Faltam<strong>${fmt(m.remaining)}</strong></div></div>
+    <div class="goal-card-bottom"><div class="goal-insight">${goalInsight(m)}</div><button class="goal-add-value" onclick="openGoalValueModal('${g.id}')">+ Adicionar</button></div>
+  </article>`;
+}
+function renderGoalsSection(){
+  const summary = goalSummary();
+  const featured = getFeaturedGoal();
+  const featuredMetrics = featured ? goalMetrics(featured) : null;
+  const filtered = filteredGoals();
+  const featureAccent = featured ? goalAccent(featured,0) : '#34D399';
+  const featuredMarkup = featured ? `<div class="goal-featured" style="--goal-accent:${featureAccent}">
+    <div class="goal-featured-main">
+      <div class="goal-featured-kicker">⭐ Meta em destaque</div>
+      <div class="goal-featured-title"><div class="goal-icon">${safeText(featured.icon||'🛟')}</div><h3>${safeText(featured.name)}</h3></div>
+      <div class="goal-featured-amount">${fmt(featuredMetrics.current)} <span>de ${fmt(featuredMetrics.target)}</span></div>
+      <div class="goal-progress-row"><span class="progress-label">${featuredMetrics.status.key==='done'?'Objetivo alcançado':'Construindo seu futuro'}</span><span class="percent">${featuredMetrics.pct.toFixed(1)}%</span></div>
+      <div class="goal-progress" aria-label="${featuredMetrics.pct.toFixed(1)}% concluído"><div class="goal-progress-fill" style="--goal-pct:${featuredMetrics.pct}%"></div></div>
+      <div class="goal-featured-meta"><span>Faltam <strong>${fmt(featuredMetrics.remaining)}</strong></span><span>📅 <strong>${featured.deadline?goalDateLabel(featured.deadline):'Sem prazo'}</strong></span></div>
+      <div class="goal-insight"><b>🤖 Insight do Copiloto</b><br>${goalInsight(featuredMetrics)}</div>
+    </div>
+    <div class="goal-featured-side"><div class="goal-ring" style="--goal-pct:${featuredMetrics.pct}%"><svg viewBox="0 0 36 36" aria-hidden="true"><circle class="goal-ring-track" cx="18" cy="18" r="15.5"/><circle class="goal-ring-progress" cx="18" cy="18" r="15.5"/></svg><div class="goal-ring-label">${featuredMetrics.pct.toFixed(0)}%<small>concluído</small></div></div><div class="goal-plan"><div class="goal-plan-label">Plano mensal</div><strong>${featuredMetrics.monthlyNeed?fmt(featuredMetrics.monthlyNeed):'Defina um prazo'}</strong><p>${featuredMetrics.monthlyNeed?'para alcançar a meta no prazo.':'e o Copiloto calcula seu caminho.'}</p><button class="goal-add-value" onclick="openGoalValueModal('${featured.id}')">+ Adicionar valor</button></div></div>
+  </div>` : '';
+  return `<section class="goals-shell" id="goalsSection"><div class="goals-content">
+    <div class="goals-header"><div><div class="goals-eyebrow">Seu futuro, em construção</div><h2>🎯 Minhas metas</h2><p>Transforme seus planos em objetivos reais.</p></div><button class="btn" onclick="openGoalModal()">+ Nova meta</button></div>
+    <div class="goals-overview"><div class="goal-overview-item"><span class="label">Metas ativas</span><strong>${summary.count}</strong></div><div class="goal-overview-item"><span class="label">Objetivo total</span><strong>${fmt(summary.target)}</strong></div><div class="goal-overview-item"><span class="label">Já conquistado</span><strong class="accent">${fmt(summary.current)}</strong></div><div class="goal-overview-item"><span class="label">Progresso geral</span><strong class="accent">${summary.pct.toFixed(0)}%</strong></div></div>
+    ${featuredMarkup}
+    <div class="goals-toolbar"><span class="goals-toolbar-title">${summary.count?'Todas as suas metas':'Comece seu próximo objetivo'}</span><div class="goal-filters"><button class="goal-filter ${activeGoalFilter==='all'?'active':''}" onclick="setGoalFilter('all')">Todas</button><button class="goal-filter ${activeGoalFilter==='active'?'active':''}" onclick="setGoalFilter('active')">Em andamento</button><button class="goal-filter ${activeGoalFilter==='done'?'active':''}" onclick="setGoalFilter('done')">Concluídas</button><button class="goal-filter ${activeGoalFilter==='priority'?'active':''}" onclick="setGoalFilter('priority')">Prioridade</button></div></div>
+    <div class="goals-grid">${filtered.length ? filtered.map((g,i)=>renderGoalCard(g,i)).join('') : '<div class="goal-empty"><strong>Nenhuma meta nesta visão</strong>Crie um objetivo e acompanhe cada passo da sua jornada.</div>'}</div>
+  </div></section>`;
 }
 
 // ---- render ----
@@ -592,23 +837,7 @@ function render(){
     </div>
   </div>
 
-  <div class="card">
-    <h2 class="sec">🎯 Minhas metas</h2>
-    <p class="hint">Crie uma meta (ex: viagem, reserva de emergência) e o app calcula sozinho quanto você precisa guardar por mês para chegar lá no prazo.</p>
-    ${state.goals.length ? state.goals.map(g=>{
-      const gs = goalStatus(g);
-      return `<div class="cat-row">
-        <div class="top-line"><span class="name">${g.name}</span><span class="vals">${fmt(g.current)} / ${fmt(g.target)} · ${gs.pct.toFixed(0)}%</span></div>
-        <div class="bar-bg"><div class="bar-fill" style="width:${gs.pct}%"></div></div>
-        <div class="note ${gs.verdict.cls}" style="margin:6px 0;">${gs.verdict.emoji} ${gs.verdict.text}</div>
-        <div style="display:flex;gap:8px;">
-          <button class="btn ghost sm" onclick="editGoal('${g.id}')">Editar</button>
-          <button class="btn ghost sm" onclick="deleteGoal('${g.id}')">Excluir</button>
-        </div>
-      </div>`;
-    }).join('') : '<div class="empty">Nenhuma meta ainda. Que tal criar a primeira?</div>'}
-    <button class="btn ghost sm" onclick="openGoalModal()" style="margin-top:4px;">+ Nova meta</button>
-  </div>
+  ${renderGoalsSection()}
 
   <div class="card">
     <h2 class="sec">🏦 Minhas contas</h2>
@@ -687,7 +916,7 @@ function render(){
     <p style="color:var(--gray);font-size:13px;margin:0 0 4px;">Seus dados ficam salvos neste navegador.</p>
     <div class="settings-row">
       <button class="btn ghost sm" onclick="openNameEditor()">Alterar meu nome</button>
-      ${!state.seeded ? '<button class="btn ghost sm" onclick="seedDemo()">Experimentar com dados de exemplo</button>' : '<button class="btn ghost sm" onclick="clearDemo()">Apagar dados de demonstração</button>'}
+      ${!state.seeded ? '<button class="btn ghost sm" onclick="openDemoConfirm()">Experimentar com dados de exemplo</button>' : '<button class="btn ghost sm" onclick="clearDemo()">Apagar dados de demonstração</button>'}
     </div>
   </div>
 
@@ -948,39 +1177,73 @@ function deleteBill(id){
 
 function openGoalModal(){
   editingGoalId = null;
+  selectedGoalIcon = '🛟'; selectedGoalColor = '#34D399';
   document.getElementById('goalModalTitle').textContent = "Nova meta";
   document.getElementById('g_name').value=''; document.getElementById('g_target').value='';
   document.getElementById('g_current').value=''; document.getElementById('g_deadline').value='';
+  document.getElementById('g_priority').value='normal'; updateGoalChoices();
   document.getElementById('goalModalBg').classList.add('open');
 }
 function editGoal(id){
   const g = state.goals.find(x=>x.id===id); if(!g) return;
   editingGoalId = id;
+  selectedGoalIcon = g.icon || '🛟'; selectedGoalColor = g.color || '#34D399';
   document.getElementById('goalModalTitle').textContent = "Editar meta";
   document.getElementById('g_name').value=g.name; document.getElementById('g_target').value=g.target;
   document.getElementById('g_current').value=g.current; document.getElementById('g_deadline').value=g.deadline||'';
+  document.getElementById('g_priority').value=g.priority||'normal'; updateGoalChoices();
   document.getElementById('goalModalBg').classList.add('open');
 }
 function closeGoalModal(){ document.getElementById('goalModalBg').classList.remove('open'); }
+function selectGoalIcon(icon){ selectedGoalIcon=icon; updateGoalChoices(); }
+function selectGoalColor(color){ selectedGoalColor=color; updateGoalChoices(); }
+function updateGoalChoices(){
+  document.querySelectorAll('#goalIconChoices [data-icon]').forEach(button=>button.classList.toggle('active',button.dataset.icon===selectedGoalIcon));
+  document.querySelectorAll('#goalColorChoices [data-color]').forEach(button=>button.classList.toggle('active',button.dataset.color===selectedGoalColor));
+  const preview = document.getElementById('goalModalIconPreview');
+  if(preview){ preview.textContent=selectedGoalIcon; preview.style.setProperty('--goal-accent',selectedGoalColor); }
+}
 function saveGoal(){
   const name = document.getElementById('g_name').value.trim();
   const target = parseFloat(document.getElementById('g_target').value);
   const current = parseFloat(document.getElementById('g_current').value)||0;
   const deadline = document.getElementById('g_deadline').value;
   if(!name || !target || target<=0){ toast("Preencha nome e valor objetivo."); return; }
+  if(current<0 || current>target){ toast("O valor atual deve estar entre zero e o objetivo."); return; }
   if(editingGoalId){
-    Object.assign(state.goals.find(x=>x.id===editingGoalId), {name,target,current,deadline});
-    toast("Meta atualizada.");
+    Object.assign(state.goals.find(x=>x.id===editingGoalId), {name,target,current,deadline,icon:selectedGoalIcon,color:selectedGoalColor,priority:document.getElementById('g_priority').value});
+    toast("✓ Progresso atualizado.");
   } else {
-    state.goals.push({id:uid(),name,target,current,deadline});
-    toast("Meta criada.");
+    state.goals.push({id:uid(),name,target,current,deadline,icon:selectedGoalIcon,color:selectedGoalColor,priority:document.getElementById('g_priority').value,createdAt:Date.now()});
+    toast("✓ Meta criada.");
   }
   save(); closeGoalModal(); render();
 }
-function deleteGoal(id){
+function openGoalValueModal(id){
+  const goal = state.goals.find(x=>x.id===id); if(!goal) return;
+  editingGoalValueId=id; document.getElementById('g_value').value='';
+  document.getElementById('goalValueHint').textContent=`${goal.name}: faltam ${fmt(goalMetrics(goal).remaining)} para concluir.`;
+  document.getElementById('goalValueModalBg').classList.add('open');
+  setTimeout(()=>document.getElementById('g_value').focus(),50);
+}
+function closeGoalValueModal(){ editingGoalValueId=null; document.getElementById('goalValueModalBg').classList.remove('open'); }
+function setGoalValue(value){ document.getElementById('g_value').value=value; }
+function addGoalValue(){
+  const goal = state.goals.find(x=>x.id===editingGoalValueId); const value=parseFloat(document.getElementById('g_value').value);
+  if(!goal || !value || value<=0){ toast('Digite um valor válido.'); return; }
+  const wasComplete = goalMetrics(goal).status.key==='done';
+  goal.current=Math.min(Number(goal.target),Number(goal.current||0)+value); save(); closeGoalValueModal(); render();
+  toast(goal.current>=goal.target && !wasComplete ? '🏆 Meta concluída!' : '✓ Progresso atualizado.');
+}
+function openGoalDeleteModal(id){
   const g = state.goals.find(x=>x.id===id); if(!g) return;
-  if(!confirm(`Excluir a meta "${g.name}"?`)) return;
+  pendingDeleteGoalId=id; document.getElementById('goalDeleteHint').textContent=`“${g.name}” será removida deste navegador. Essa ação não pode ser desfeita.`; document.getElementById('goalDeleteModalBg').classList.add('open');
+}
+function closeGoalDeleteModal(){ pendingDeleteGoalId=null; document.getElementById('goalDeleteModalBg').classList.remove('open'); }
+function confirmDeleteGoal(){
+  const id=pendingDeleteGoalId; if(!id) return;
   state.goals = state.goals.filter(x=>x.id!==id); save(); render(); toast("Meta excluída.");
+  closeGoalDeleteModal();
 }
 
 function openAccountModal(){
