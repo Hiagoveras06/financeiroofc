@@ -745,8 +745,8 @@ function exportReport(period){
   logoImage.onload = ()=>{
     try{
       const canvas = document.createElement('canvas');
-      canvas.width = 256; canvas.height = 256;
-      canvas.getContext('2d').drawImage(logoImage,0,0,256,256);
+      canvas.width = 96; canvas.height = 96;
+      canvas.getContext('2d').drawImage(logoImage,0,0,96,96);
       buildReport(canvas.toDataURL('image/png'));
     }catch(error){ buildReport(''); }
   };
