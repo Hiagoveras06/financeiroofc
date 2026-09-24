@@ -726,6 +726,7 @@ function exportReport(period){
   const pdfButtonCode = `onclick="if(window.html2pdf){html2pdf().set({margin:10,filename:'${pdfFileName}',image:{type:'jpeg',quality:.98},html2canvas:{scale:2,useCORS:true,backgroundColor:'#ffffff'},jsPDF:{unit:'mm',format:'a4',orientation:'portrait'}}).from(document.querySelector('.sheet')).save()}else{window.print()}"`;
   const reportDocument = reportHtml
     .replace('<head>','<head><script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></scr'+'ipt>')
+    .replace('<style>','<style>.brand img{display:block!important;width:58px!important;height:58px!important;padding:3px!important;background:#052018!important;border:2px solid #10B981!important;border-radius:13px!important;box-shadow:0 3px 10px rgba(7,17,14,.18)!important}.brand{align-items:center!important}</style><style>')
     .replace('body{margin:0;background:#edf3ef','body{-webkit-print-color-adjust:exact;print-color-adjust:exact;margin:0;background:#edf3ef')
     .replace('grid-template-columns:repeat(4,1fr)','grid-template-columns:repeat(5,1fr)')
     .replace('<div class="metric"><small>Score atual</small>', `<div class="metric"><small>Saldo real atual</small><strong>${balanceText}</strong></div><div class="metric"><small>Score atual</small>`)
