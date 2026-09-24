@@ -897,7 +897,7 @@ function render(){
     <p class="hint">Digite quanto você tem agora, no total. Depois disso, cada lançamento que você adicionar soma ou desconta sozinho — você não precisa ficar atualizando.</p>
     ${(()=>{ const rb = computeRealBalance(); return rb!==null
       ? `<div class="amt">${fmt(rb)}</div><div style="font-size:12px;color:var(--gray);">Base informada em ${new Date(state.realBalanceDate+'T00:00:00').toLocaleDateString('pt-BR')}</div>`
-      : `<div class="empty" style="padding:10px 0;">Você ainda não informou seu saldo real.</div>`; })()}
+      : `<div class="amt" style="color:${c.balance>=0?'var(--em)':'var(--red)'}">${fmt(c.balance)}</div><div style="font-size:12px;color:var(--gray);">Saldo calculado: receitas menos despesas deste mês.</div>`; })()}
     <button class="btn ghost sm" onclick="openBalanceModal()" style="margin-top:10px;">${state.realBalance!==null?'Atualizar meu saldo':'+ Adicionar meu saldo real'}</button>
   </div>
 
