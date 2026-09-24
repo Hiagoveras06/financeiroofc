@@ -710,7 +710,7 @@ function exportReport(period){
   const range = `${reportDateLabel(data.start)} a ${reportDateLabel(data.end)}`;
   const user = state.userName ? safeText(state.userName) : 'Minha vida financeira';
   const appUrl = safeText(window.location.href);
-  const logoSource = new URL('../logotipo/logo.png',window.location.href).href;
+  const logoMarkup = '<svg class="brand-logo" viewBox="0 0 64 64" role="img" aria-label="Finanças Veras"><rect width="64" height="64" rx="14" fill="#052018" stroke="#10B981" stroke-width="2"/><rect x="30" y="13" width="7" height="24" rx="2" fill="#61F2B8"/><rect x="20" y="22" width="7" height="22" rx="2" fill="#2DE39B"/><rect x="40" y="7" width="7" height="23" rx="2" fill="#31E8A0"/><path d="M14 31 27 48c2 3 6 3 8 0l17-23" fill="none" stroke="#10D98E" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></svg>';
   const buildReport = (logoUrl)=>{
   const categoryRows = data.categories.length ? data.categories.map(([cat,value])=>`
     <tr><td>${safeText(cat)}</td><td class="money">${fmt(value)}</td><td><div class="mini-bar"><span style="width:${Math.min(100,data.expense>0?value/data.expense*100:0)}%"></span></div></td></tr>`).join('') : '<tr><td colspan="3" class="muted">Nenhuma despesa registrada no período.</td></tr>';
@@ -725,8 +725,9 @@ function exportReport(period){
   const pdfFileName = `${period}-relatorio-financeiro.pdf`;
   const pdfButtonCode = `onclick="if(window.html2pdf){html2pdf().set({margin:10,filename:'${pdfFileName}',image:{type:'jpeg',quality:.98},html2canvas:{scale:2,useCORS:true,backgroundColor:'#ffffff'},jsPDF:{unit:'mm',format:'a4',orientation:'portrait'}}).from(document.querySelector('.sheet')).save()}else{window.print()}"`;
   const reportDocument = reportHtml
+    .replace(/<img src="[\s\S]*?" alt="">/,logoMarkup)
     .replace('<head>','<head><script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></scr'+'ipt>')
-    .replace('<style>','<style>.brand img{display:block!important;width:58px!important;height:58px!important;padding:3px!important;background:#052018!important;border:2px solid #10B981!important;border-radius:13px!important;box-shadow:0 3px 10px rgba(7,17,14,.18)!important}.brand{align-items:center!important}</style><style>')
+    .replace('<style>','<style>.brand-logo{display:block!important;width:58px!important;height:58px!important;flex:none!important}.brand{align-items:center!important}</style><style>')
     .replace('body{margin:0;background:#edf3ef','body{-webkit-print-color-adjust:exact;print-color-adjust:exact;margin:0;background:#edf3ef')
     .replace('grid-template-columns:repeat(4,1fr)','grid-template-columns:repeat(5,1fr)')
     .replace('<div class="metric"><small>Score atual</small>', `<div class="metric"><small>Saldo real atual</small><strong>${balanceText}</strong></div><div class="metric"><small>Score atual</small>`)
@@ -741,17 +742,7 @@ function exportReport(period){
   toast('Relatório pronto. Clique em “Salvar como PDF”.');
   setTimeout(()=>URL.revokeObjectURL(reportUrl),300000);
   };
-  const logoImage = new Image();
-  logoImage.onload = ()=>{
-    try{
-      const canvas = document.createElement('canvas');
-      canvas.width = 96; canvas.height = 96;
-      canvas.getContext('2d').drawImage(logoImage,0,0,96,96);
-      buildReport(canvas.toDataURL('image/png'));
-    }catch(error){ buildReport(''); }
-  };
-  logoImage.onerror = ()=>buildReport('');
-  logoImage.src = logoSource;
+  buildReport(logoMarkup);
 }
 
 // ---- transaction modal ----
