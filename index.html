@@ -132,6 +132,20 @@ h2.sec{font-size:15px;text-transform:none;color:var(--white);margin:0 0 14px;fon
 .xray-destination p{color:#91AA9E;font-size:11px;line-height:1.4;margin:6px 0 0;}
 .xray-insight{margin-top:17px;padding:12px 14px;border-radius:11px;background:rgba(16,185,129,.08);border:1px solid rgba(52,211,153,.17);color:#C3D6CC;font-size:12px;line-height:1.45;}
 .xray-insight strong{color:#A7F3D0;}
+.xray-insights-list{display:grid;gap:10px;}
+.xray-action{display:grid;grid-template-columns:30px minmax(0,1fr);gap:11px;padding:14px;border:1px solid rgba(164,221,196,.12);border-radius:13px;background:rgba(5,18,13,.3);}
+.xray-action-number{display:grid;place-items:center;width:30px;height:30px;border-radius:9px;background:rgba(16,185,129,.14);color:#A7F3D0;font:800 13px 'Manrope',sans-serif;}
+.xray-action-copy{min-width:0;}
+.xray-action-title{display:flex;align-items:center;gap:7px;color:#E8F4EE;font:700 13px 'Manrope',sans-serif;line-height:1.3;}
+.xray-action-title span{color:#A7F3D0;font-size:15px;}
+.xray-action p{color:#AFC4B8;font-size:12px;line-height:1.45;margin:5px 0 9px;}
+.xray-next{display:block;padding:8px 10px;border-radius:8px;background:rgba(16,185,129,.08);color:#C3D6CC;font-size:11px;line-height:1.4;}
+.xray-next strong{color:#6EE7B7;margin-right:5px;}
+.xray-action.warn .xray-action-number{background:rgba(248,113,113,.12);color:#FCA5A5;}
+.xray-action.warn .xray-next{background:rgba(251,191,36,.08);}
+.xray-action.warn .xray-next strong,.xray-action.attention .xray-next strong{color:#F6D889;}
+.xray-action.attention .xray-action-number{background:rgba(251,191,36,.12);color:#F6D889;}
+.xray-action.neutral .xray-action-number{background:rgba(96,165,250,.12);color:#93C5FD;}
 .xray-empty{padding:16px;border:1px dashed rgba(164,221,196,.17);border-radius:11px;color:#91AA9E;font-size:12px;line-height:1.45;}
 .bill{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--line);}
 .bill:last-child{border-bottom:none;}
@@ -787,17 +801,35 @@ function buildXrayData(c){
   const goalCurrent = state.goals.reduce((sum,g)=>sum+Math.min(Number(g.current||0),Number(g.target||0)),0);
   return {categories,cardSpends,pendingBills,economy,economyRate,goalTarget,goalCurrent};
 }
+function buildActionableInsights(c,data){
+  const insights=[];
+  const top=data.categories[0];
+  if(c.income===0 && c.expense===0) return [{tone:'neutral',icon:'◌',title:'Comece pelo retrato completo',body:'Ainda não há receitas ou despesas suficientes para entender seu caminho financeiro.',step:'Registre sua próxima receita e as despesas principais do mês.'}];
+  if(c.income===0){
+    insights.push({tone:'warn',icon:'!',title:'Você ainda não informou uma receita',body:`Já existem ${fmt(c.expense)} em despesas, mas sem uma entrada registrada não dá para medir sua economia nem saber quanto realmente sobra.`,step:'Registre sua principal fonte de renda antes de tomar novas decisões.'});
+  } else if(data.economy<0){
+    insights.push({tone:'warn',icon:'!',title:'As despesas passaram das receitas',body:`O mês está negativo em ${fmt(Math.abs(data.economy))}. Continuar no mesmo ritmo aumenta a pressão sobre o próximo mês.`,step:top?`Revise primeiro ${safeText(top[0])}, onde estão concentrados ${fmt(top[1])}.`:'Revise suas maiores despesas antes de fazer um novo gasto.'});
+  } else if(data.economyRate<10){
+    insights.push({tone:'attention',icon:'↗',title:'Sua margem para imprevistos está pequena',body:`Você está mantendo ${data.economyRate.toFixed(1)}% da renda livre neste mês. Uma despesa inesperada pode consumir essa margem.`,step:top?`Defina um limite para ${safeText(top[0])} e tente liberar uma pequena parte desse valor.`:'Evite novas despesas até criar uma margem mais confortável.'});
+  } else {
+    insights.push({tone:'good',icon:'✓',title:`Você está preservando ${data.economyRate.toFixed(1)}% da sua renda`,body:`Depois das despesas registradas, sobraram ${fmt(data.economy)}. Essa margem é o espaço que pode proteger seus próximos meses.`,step:'Direcione uma parte dessa sobra para uma meta ou reserva antes de gastá-la.'});
+  }
+  if(top){
+    const budget=Number(state.budgets[top[0]]||0);
+    if(budget && top[1]>budget) insights.push({tone:'warn',icon:'!',title:`${safeText(top[0])} passou do limite`,body:`Essa categoria consumiu ${fmt(top[1])}, ultrapassando o limite em ${fmt(top[1]-budget)}.`,step:`Antes de lançar outra despesa em ${safeText(top[0])}, reavalie o limite ou adie o próximo gasto.`});
+    else if(!budget) insights.push({tone:'neutral',icon:'+',title:`${safeText(top[0])} é seu maior destino`,body:`Você concentrou ${fmt(top[1])} nessa categoria neste mês, mas ainda não definiu um limite para ela.`,step:`Defina um limite mensal para ${safeText(top[0])} e compare seu ritmo nos próximos lançamentos.`});
+  }
+  if(data.pendingBills>0) insights.push({tone:'attention',icon:'□',title:`Existem ${fmt(data.pendingBills)} em contas pendentes`,body:'Esse valor ainda precisa sair do seu dinheiro disponível, mesmo que não tenha sido pago.',step:'Priorize as contas pendentes antes de considerar a sobra como dinheiro livre.'});
+  const cardTotal=data.cardSpends.reduce((sum,item)=>sum+item.value,0);
+  if(cardTotal>0 && c.expense>0 && cardTotal/c.expense>=.5) insights.push({tone:'attention',icon:'▣',title:'Boa parte das despesas está no cartão',body:`${fmt(cardTotal)} das suas despesas foram feitas no cartão. Elas ainda precisam ser pagas na fatura.`,step:'Confira a fatura antes de assumir novos parcelamentos ou compras.'});
+  const goal=state.goals.find(item=>Number(item.current||0)<Number(item.target||0));
+  if(goal){ const metrics=goalMetrics(goal); insights.push({tone:'good',icon:'◈',title:`Sua meta “${safeText(goal.name)}” precisa de um próximo aporte`,body:`Ainda faltam ${fmt(metrics.remaining)} para chegar ao objetivo${metrics.monthlyNeed?`, cerca de ${fmt(metrics.monthlyNeed)} por mês`:''}.`,step:metrics.monthlyNeed?`Separe aproximadamente ${fmt(metrics.monthlyNeed)} no próximo ciclo.`:'Escolha um prazo para transformar essa meta em um plano.'}); }
+  return insights.slice(0,4);
+}
 function renderFinancialXray(c){
   const data=buildXrayData(c);
-  const monthName=new Date().toLocaleDateString('pt-BR',{month:'long',year:'numeric'});
-  const hasData=c.income>0||c.expense>0;
-  const economyLabel=data.economy===null ? 'Sem receita' : data.economy>=0 ? 'Economia líquida' : 'Déficit do mês';
-  const economyValue=data.economy===null ? '—' : fmt(Math.abs(data.economy));
-  const economyClass=data.economy===null ? '' : data.economy>=0 ? 'positive' : 'negative';
-  const rateText=data.economyRate===null ? 'Registre uma receita para medir sua economia.' : data.economy>=0 ? `Você está economizando ${data.economyRate.toFixed(1)}% da sua renda.` : `Suas despesas superam suas receitas em ${Math.abs(data.economyRate).toFixed(1)}%.`;
-  const categoryMarkup=data.categories.length ? data.categories.slice(0,6).map(([name,value])=>{ const pct=c.expense>0?value/c.expense*100:0; const budget=Number(state.budgets[name]||0); const budgetNote=budget?(value<=budget?`${fmt(budget-value)} ainda disponíveis`:`Acima do limite em ${fmt(value-budget)}`):'Sem limite definido'; return `<div class="xray-category"><div class="xray-category-top"><span>${safeText(name)}</span><span>${fmt(value)} · ${pct.toFixed(0)}%</span></div><div class="xray-bar"><div class="xray-bar-fill" style="--xray-pct:${pct}%"></div></div><div class="xray-category-note">${budgetNote}</div></div>`; }).join('') : '<div class="xray-empty">Ainda não há despesas neste mês. Seus destinos aparecerão aqui conforme você registrar lançamentos.</div>';
-  const sideMarkup=`${data.cardSpends.length?`<div class="xray-destination"><div class="xray-destination-head"><span>💳</span><span>Cartões</span><b>${fmt(data.cardSpends.reduce((sum,item)=>sum+item.value,0))}</b></div><p>${data.cardSpends.slice(0,2).map(item=>`${safeText(item.name)}: ${fmt(item.value)}`).join(' · ')}</p></div>`:''}<div class="xray-destination"><div class="xray-destination-head"><span>📅</span><span>Contas pendentes</span><b>${fmt(data.pendingBills)}</b></div><p>${data.pendingBills>0?'Compromissos que ainda reduzem seu dinheiro disponível.':'Nenhuma conta pendente cadastrada.'}</p></div>${data.goalTarget>0?`<div class="xray-destination"><div class="xray-destination-head"><span>🎯</span><span>Metas</span><b>${fmt(data.goalCurrent)}</b></div><p>${fmt(data.goalCurrent)} de ${fmt(data.goalTarget)} já direcionados aos seus objetivos.</p></div>`:''}`;
-  return `<section class="card xray-card"><div class="xray-header"><div><h2 class="sec">🔎 Raio-X financeiro</h2><p class="xray-subtitle">Veja para onde seu dinheiro está indo e o que realmente sobra depois das decisões deste mês.</p></div><span class="xray-month">${monthName}</span></div>${hasData?`<div class="xray-overview"><div class="xray-stat"><span class="xray-stat-label">Entrou</span><strong class="positive">${fmt(c.income)}</strong><small>receitas registradas</small></div><div class="xray-stat"><span class="xray-stat-label">Saiu</span><strong>${fmt(c.expense)}</strong><small>despesas registradas</small></div><div class="xray-stat"><span class="xray-stat-label">${economyLabel}</span><strong class="${economyClass}">${economyValue}</strong><small>${data.economyRate===null?'aguardando receita':`${Math.abs(data.economyRate).toFixed(1)}% da renda`}</small></div></div><div class="xray-body"><div><div class="xray-section-title"><span>Principais destinos</span><span>${data.categories.length} categorias</span></div>${categoryMarkup}</div><div class="xray-side">${sideMarkup}</div></div><div class="xray-insight"><strong>🤖 Insight do Copiloto</strong><br>${rateText}${data.categories[0]?` A maior concentração está em <strong>${safeText(data.categories[0][0])}</strong>, com ${fmt(data.categories[0][1])}.`:''}</div>`:`<div class="xray-empty">Adicione receitas e despesas para visualizar o caminho do seu dinheiro. O raio-X será atualizado automaticamente a cada lançamento.</div>`}</section>`;
+  const insights=buildActionableInsights(c,data);
+  return `<section class="card xray-card"><div class="xray-header"><div><h2 class="sec">🔎 Raio-X financeiro</h2><p class="xray-subtitle">Poucos sinais, próximos passos claros para você continuar no controle.</p></div></div><div class="xray-insights-list">${insights.map((item,index)=>`<article class="xray-action ${item.tone}"><div class="xray-action-number">${index+1}</div><div class="xray-action-copy"><div class="xray-action-title"><span>${item.icon}</span>${item.title}</div><p>${item.body}</p><div class="xray-next"><strong>Próximo passo</strong>${item.step}</div></div></article>`).join('')}</div></section>`;
 }
 
 function renderGoalCard(g,index){
