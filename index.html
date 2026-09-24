@@ -104,6 +104,35 @@ h1,h2,h3,.num{font-family:'Manrope',sans-serif;}
 .cat-row input{width:70px;background:var(--card2);border:1px solid var(--line);color:var(--white);border-radius:6px;padding:3px 6px;font-size:12px;}
 h2.sec{font-size:15px;text-transform:none;color:var(--white);margin:0 0 14px;font-weight:700;display:flex;align-items:center;gap:8px;}
 .insight{background:var(--card2);border-radius:10px;padding:12px 14px;margin-bottom:8px;font-size:14px;color:#D1D9E0;line-height:1.5;}
+.xray-card{background:linear-gradient(145deg,rgba(16,35,28,.98),rgba(13,25,21,.98));border-color:rgba(111,220,177,.16);overflow:hidden;}
+.xray-header{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:18px;}
+.xray-header h2{margin-bottom:5px!important;}
+.xray-subtitle{color:#9BB5A8;font-size:12.5px;line-height:1.45;margin:0;max-width:560px;}
+.xray-month{color:#A7F3D0;background:rgba(16,185,129,.1);border:1px solid rgba(52,211,153,.22);border-radius:8px;padding:7px 10px;font-size:11px;white-space:nowrap;}
+.xray-overview{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-bottom:18px;}
+.xray-stat{padding:13px;border:1px solid rgba(164,221,196,.12);border-radius:12px;background:rgba(5,18,13,.34);min-width:0;}
+.xray-stat-label{display:block;color:#91AA9E;font-size:11px;margin-bottom:6px;}
+.xray-stat strong{display:block;color:#F3FBF7;font:800 19px/1.1 'Manrope',sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.xray-stat strong.positive{color:#6EE7B7;}.xray-stat strong.negative{color:#FCA5A5;}
+.xray-stat small{display:block;color:#91AA9E;font-size:10px;margin-top:5px;}
+.xray-body{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(220px,.8fr);gap:18px;}
+.xray-section-title{display:flex;align-items:center;justify-content:space-between;gap:10px;color:#E8F4EE;font:700 13px 'Manrope',sans-serif;margin-bottom:11px;}
+.xray-section-title span{color:#91AA9E;font:500 10px 'Inter',sans-serif;}
+.xray-category{margin-bottom:12px;}
+.xray-category:last-child{margin-bottom:0;}
+.xray-category-top{display:flex;justify-content:space-between;gap:10px;color:#DDEBE3;font-size:12px;margin-bottom:5px;}
+.xray-category-top span:last-child{color:#A7F3D0;font-weight:700;white-space:nowrap;}
+.xray-bar{height:7px;background:rgba(3,14,10,.58);border-radius:99px;overflow:hidden;}
+.xray-bar-fill{height:100%;width:var(--xray-pct);border-radius:inherit;background:linear-gradient(90deg,#34D399,#60A5FA);transition:width .45s ease;}
+.xray-category-note{color:#849C91;font-size:10px;margin-top:4px;}
+.xray-side{display:grid;gap:10px;align-content:start;}
+.xray-destination{padding:12px;border-radius:11px;border:1px solid rgba(164,221,196,.1);background:rgba(5,18,13,.28);}
+.xray-destination-head{display:flex;align-items:center;gap:8px;color:#DDEBE3;font-size:12px;font-weight:700;}
+.xray-destination-head b{margin-left:auto;color:#A7F3D0;white-space:nowrap;}
+.xray-destination p{color:#91AA9E;font-size:11px;line-height:1.4;margin:6px 0 0;}
+.xray-insight{margin-top:17px;padding:12px 14px;border-radius:11px;background:rgba(16,185,129,.08);border:1px solid rgba(52,211,153,.17);color:#C3D6CC;font-size:12px;line-height:1.45;}
+.xray-insight strong{color:#A7F3D0;}
+.xray-empty{padding:16px;border:1px dashed rgba(164,221,196,.17);border-radius:11px;color:#91AA9E;font-size:12px;line-height:1.45;}
 .bill{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--line);}
 .bill:last-child{border-bottom:none;}
 .bill input[type=checkbox]{width:18px;height:18px;accent-color:var(--em);cursor:pointer;}
@@ -155,6 +184,27 @@ h2.sec{font-size:15px;text-transform:none;color:var(--white);margin:0 0 14px;fon
 .budget-set{display:flex;align-items:center;gap:8px;margin-top:8px;font-size:12px;color:var(--gray);flex-wrap:wrap;}
 .budget-set input{width:110px;background:var(--card2);border:1px solid var(--line);color:var(--white);border-radius:6px;padding:6px 8px;font-size:13px;}
 .budget-set select{background:var(--card2);border:1px solid var(--line);color:var(--white);border-radius:6px;padding:6px 8px;font-size:13px;}
+.budget-card{background:linear-gradient(145deg,rgba(16,35,28,.98),rgba(13,25,21,.98));border-color:rgba(111,220,177,.16);}
+.budget-card h2.sec{margin-bottom:6px;}
+.budget-intro{color:#9BB5A8;font-size:12.5px;line-height:1.5;margin:0;max-width:680px;}
+.budget-summary{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:18px;margin:18px 0 16px;padding:15px 16px;border:1px solid rgba(164,221,196,.13);border-radius:14px;background:rgba(5,18,13,.34);}
+.budget-summary-copy{min-width:0;}
+.budget-summary-label{display:flex;justify-content:space-between;align-items:baseline;gap:10px;color:#A7BDB2;font-size:12px;margin-bottom:9px;}
+.budget-summary-label strong{color:#E8F4EE;font:800 16px 'Manrope',sans-serif;white-space:nowrap;}
+.budget-overall-progress{height:11px;margin:0;background:rgba(3,14,10,.6);}
+.budget-overall-progress .bar-fill{min-width:0;transition:width .5s cubic-bezier(.22,.8,.3,1);}
+.budget-total{display:grid;place-items:center;min-width:82px;height:82px;border-radius:50%;border:1px solid rgba(52,211,153,.28);background:rgba(16,185,129,.08);text-align:center;}
+.budget-total strong{display:block;color:#6EE7B7;font:800 21px/1 'Manrope',sans-serif;}
+.budget-total span{display:block;color:#91AA9E;font-size:10px;margin-top:4px;}
+.budget-toolbar{margin:0 0 11px;}
+.budget-toolbar .summary{color:#A7BDB2;font-size:12px;}
+.budget-category-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;}
+.budget-category{padding:13px;border:1px solid rgba(164,221,196,.11);border-radius:12px;background:rgba(7,20,15,.5);min-width:0;}
+.budget-category .top-line{margin-bottom:8px;}
+.budget-category .bar-bg{height:7px;margin:0;}
+.budget-category .budget-set{margin-top:10px;padding-top:9px;border-top:1px solid rgba(164,221,196,.08);}
+.budget-category .budget-set label{flex:1;min-width:120px;}
+.budget-category .budget-set input{width:92px;}
 .goals-shell{--goal-accent:#34D399;--goal-blue:#60A5FA;background:linear-gradient(145deg,rgba(18,39,31,.98),rgba(13,25,21,.98));border:1px solid rgba(111,220,177,.2);border-radius:22px;padding:24px;margin-bottom:16px;overflow:hidden;position:relative;box-shadow:0 18px 45px rgba(0,0,0,.12);}
 .goals-shell::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 100% 0,rgba(52,211,153,.12),transparent 34%),linear-gradient(120deg,rgba(96,165,250,.06),transparent 45%);pointer-events:none;}
 .goals-content{position:relative;z-index:1;}
@@ -181,16 +231,16 @@ h2.sec{font-size:15px;text-transform:none;color:var(--white);margin:0 0 14px;fon
 .goal-progress-row .percent{font:800 15px 'Manrope',sans-serif;color:var(--goal-accent);}
 .goal-progress-row .progress-label{color:#9BB5A8;font-size:12px;}
 .goal-progress{height:10px;background:rgba(3,14,10,.58);border-radius:99px;overflow:hidden;box-shadow:inset 0 1px 2px rgba(0,0,0,.2);}
-.goal-progress-fill{height:100%;width:var(--goal-pct);border-radius:inherit;background:linear-gradient(90deg,var(--goal-accent),color-mix(in srgb,var(--goal-accent) 68%,#fff));transition:width .55s cubic-bezier(.22,.8,.3,1);}
+.goal-progress-fill{height:100%;width:calc(var(--goal-pct) * 1%);border-radius:inherit;background:linear-gradient(90deg,var(--goal-accent),color-mix(in srgb,var(--goal-accent) 68%,#fff));transition:width .55s cubic-bezier(.22,.8,.3,1);}
 .goal-featured-meta{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:16px;color:#A7BDB2;font-size:12px;}
 .goal-featured-meta strong{color:#F3FBF7;font-weight:700;}
 .goal-featured-side{display:flex;align-items:center;justify-content:center;gap:18px;border-left:1px solid rgba(164,221,196,.13);padding-left:20px;}
 .goal-ring{width:124px;height:124px;position:relative;flex-shrink:0;}
-.goal-ring svg{width:100%;height:100%;transform:rotate(-90deg);}
+.goal-ring svg{display:block;width:100%;height:100%;transform:rotate(-90deg);transform-origin:50% 50%;}
 .goal-ring-track,.goal-ring-progress{fill:none;stroke-width:3.2;}
 .goal-ring-track{stroke:rgba(174,211,193,.14);}
-.goal-ring-progress{stroke:var(--goal-accent);stroke-linecap:round;stroke-dasharray:100;stroke-dashoffset:calc(100 - var(--goal-pct));transition:stroke-dashoffset .65s cubic-bezier(.22,.8,.3,1);}
-.goal-ring-label{position:absolute;inset:0;display:grid;place-items:center;text-align:center;color:#F7FFFB;font:800 23px/1 'Manrope',sans-serif;}
+.goal-ring-progress{stroke:var(--goal-accent);stroke-linecap:round;stroke-dasharray:100 100;stroke-dashoffset:calc(100 - var(--goal-pct));transition:stroke-dashoffset .65s cubic-bezier(.22,.8,.3,1);}
+.goal-ring-label{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;text-align:center;color:#F7FFFB;font:800 23px/1 'Manrope',sans-serif;}
 .goal-ring-label small{display:block;color:#9BB5A8;font:500 10px 'Inter',sans-serif;margin-top:4px;}
 .goal-plan{min-width:0;}
 .goal-plan-label{color:#A7BDB2;font-size:11px;margin-bottom:6px;}
@@ -294,6 +344,21 @@ h2.sec{font-size:15px;text-transform:none;color:var(--white);margin:0 0 14px;fon
   .modal-actions{position:sticky;bottom:0;background:var(--card);padding-top:10px;}
   .modal-actions .btn{min-height:42px;}
   .goals-shell{padding:16px 12px;border-radius:16px;}
+  .budget-summary{grid-template-columns:minmax(0,1fr) auto;gap:10px;padding:12px;}
+  .budget-total{min-width:68px;height:68px;}
+  .budget-total strong{font-size:18px;}
+  .budget-category-list{grid-template-columns:1fr;gap:8px;}
+  .budget-category{padding:12px;}
+  .budget-category .budget-set label{min-width:0;}
+  .budget-category .budget-set input{width:86px;}
+  .xray-header{display:block;}
+  .xray-month{display:inline-block;margin-top:10px;}
+  .xray-overview{gap:6px;}
+  .xray-stat{padding:10px 8px;}
+  .xray-stat strong{font-size:15px;}
+  .xray-stat-label{font-size:10px;}
+  .xray-body{grid-template-columns:1fr;gap:17px;}
+  .xray-side{grid-template-columns:1fr;}
   .goals-header{display:block;margin-bottom:16px;}
   .goals-header h2{font-size:22px;}
   .goals-header .btn{width:100%;margin-top:14px;}
@@ -710,6 +775,30 @@ function buildInsights(c){
   out.push({i:'📈',t: c.projectedEnd>=0 ? `Mantendo o ritmo atual, você deve terminar o mês com aproximadamente ${fmt(c.projectedEnd)}.` : `Mantendo o ritmo atual, você deve terminar o mês no negativo, cerca de ${fmt(c.projectedEnd)}.`});
   return out.slice(0,5);
 }
+function buildXrayData(c){
+  const expenses = {};
+  c.monthTxns.filter(t=>t.type==='expense').forEach(t=>{ expenses[t.cat]=(expenses[t.cat]||0)+Number(t.amount||0); });
+  const categories = Object.entries(expenses).sort((a,b)=>b[1]-a[1]);
+  const cardSpends = state.cards.map(card=>({name:card.name,value:c.monthTxns.filter(t=>t.type==='expense'&&t.cardId===card.id).reduce((sum,t)=>sum+Number(t.amount||0),0)})).filter(card=>card.value>0).sort((a,b)=>b.value-a.value);
+  const pendingBills = state.bills.filter(b=>!b.paid).reduce((sum,b)=>sum+Number(b.amount||0),0);
+  const economy = c.income>0 ? c.monthNet : null;
+  const economyRate = economy===null ? null : economy/c.income*100;
+  const goalTarget = state.goals.reduce((sum,g)=>sum+Number(g.target||0),0);
+  const goalCurrent = state.goals.reduce((sum,g)=>sum+Math.min(Number(g.current||0),Number(g.target||0)),0);
+  return {categories,cardSpends,pendingBills,economy,economyRate,goalTarget,goalCurrent};
+}
+function renderFinancialXray(c){
+  const data=buildXrayData(c);
+  const monthName=new Date().toLocaleDateString('pt-BR',{month:'long',year:'numeric'});
+  const hasData=c.income>0||c.expense>0;
+  const economyLabel=data.economy===null ? 'Sem receita' : data.economy>=0 ? 'Economia líquida' : 'Déficit do mês';
+  const economyValue=data.economy===null ? '—' : fmt(Math.abs(data.economy));
+  const economyClass=data.economy===null ? '' : data.economy>=0 ? 'positive' : 'negative';
+  const rateText=data.economyRate===null ? 'Registre uma receita para medir sua economia.' : data.economy>=0 ? `Você está economizando ${data.economyRate.toFixed(1)}% da sua renda.` : `Suas despesas superam suas receitas em ${Math.abs(data.economyRate).toFixed(1)}%.`;
+  const categoryMarkup=data.categories.length ? data.categories.slice(0,6).map(([name,value])=>{ const pct=c.expense>0?value/c.expense*100:0; const budget=Number(state.budgets[name]||0); const budgetNote=budget?(value<=budget?`${fmt(budget-value)} ainda disponíveis`:`Acima do limite em ${fmt(value-budget)}`):'Sem limite definido'; return `<div class="xray-category"><div class="xray-category-top"><span>${safeText(name)}</span><span>${fmt(value)} · ${pct.toFixed(0)}%</span></div><div class="xray-bar"><div class="xray-bar-fill" style="--xray-pct:${pct}%"></div></div><div class="xray-category-note">${budgetNote}</div></div>`; }).join('') : '<div class="xray-empty">Ainda não há despesas neste mês. Seus destinos aparecerão aqui conforme você registrar lançamentos.</div>';
+  const sideMarkup=`${data.cardSpends.length?`<div class="xray-destination"><div class="xray-destination-head"><span>💳</span><span>Cartões</span><b>${fmt(data.cardSpends.reduce((sum,item)=>sum+item.value,0))}</b></div><p>${data.cardSpends.slice(0,2).map(item=>`${safeText(item.name)}: ${fmt(item.value)}`).join(' · ')}</p></div>`:''}<div class="xray-destination"><div class="xray-destination-head"><span>📅</span><span>Contas pendentes</span><b>${fmt(data.pendingBills)}</b></div><p>${data.pendingBills>0?'Compromissos que ainda reduzem seu dinheiro disponível.':'Nenhuma conta pendente cadastrada.'}</p></div>${data.goalTarget>0?`<div class="xray-destination"><div class="xray-destination-head"><span>🎯</span><span>Metas</span><b>${fmt(data.goalCurrent)}</b></div><p>${fmt(data.goalCurrent)} de ${fmt(data.goalTarget)} já direcionados aos seus objetivos.</p></div>`:''}`;
+  return `<section class="card xray-card"><div class="xray-header"><div><h2 class="sec">🔎 Raio-X financeiro</h2><p class="xray-subtitle">Veja para onde seu dinheiro está indo e o que realmente sobra depois das decisões deste mês.</p></div><span class="xray-month">${monthName}</span></div>${hasData?`<div class="xray-overview"><div class="xray-stat"><span class="xray-stat-label">Entrou</span><strong class="positive">${fmt(c.income)}</strong><small>receitas registradas</small></div><div class="xray-stat"><span class="xray-stat-label">Saiu</span><strong>${fmt(c.expense)}</strong><small>despesas registradas</small></div><div class="xray-stat"><span class="xray-stat-label">${economyLabel}</span><strong class="${economyClass}">${economyValue}</strong><small>${data.economyRate===null?'aguardando receita':`${Math.abs(data.economyRate).toFixed(1)}% da renda`}</small></div></div><div class="xray-body"><div><div class="xray-section-title"><span>Principais destinos</span><span>${data.categories.length} categorias</span></div>${categoryMarkup}</div><div class="xray-side">${sideMarkup}</div></div><div class="xray-insight"><strong>🤖 Insight do Copiloto</strong><br>${rateText}${data.categories[0]?` A maior concentração está em <strong>${safeText(data.categories[0][0])}</strong>, com ${fmt(data.categories[0][1])}.`:''}</div>`:`<div class="xray-empty">Adicione receitas e despesas para visualizar o caminho do seu dinheiro. O raio-X será atualizado automaticamente a cada lançamento.</div>`}</section>`;
+}
 
 function renderGoalCard(g,index){
   const m = goalMetrics(g); const status = m.status;
@@ -723,7 +812,7 @@ function renderGoalCard(g,index){
     </div>
     <div class="goal-card-amount">${fmt(m.current)} <span>de ${fmt(m.target)}</span></div>
     <div class="goal-progress-row"><span class="progress-label">Progresso</span><span class="percent">${m.pct.toFixed(1)}%</span></div>
-    <div class="goal-progress" aria-label="${m.pct.toFixed(1)}% concluído"><div class="goal-progress-fill" style="--goal-pct:${m.pct}%"></div></div>
+    <div class="goal-progress" aria-label="${m.pct.toFixed(1)}% concluído"><div class="goal-progress-fill" style="--goal-pct:${m.pct}"></div></div>
     <div class="goal-card-details"><div class="goal-detail">Prazo<strong>${deadline}</strong></div><div class="goal-detail">Faltam<strong>${fmt(m.remaining)}</strong></div></div>
     <div class="goal-card-bottom"><div class="goal-insight">${goalInsight(m)}</div><button class="goal-add-value" onclick="openGoalValueModal('${g.id}')">+ Adicionar</button></div>
   </article>`;
@@ -740,11 +829,11 @@ function renderGoalsSection(){
       <div class="goal-featured-title"><div class="goal-icon">${safeText(featured.icon||'🛟')}</div><h3>${safeText(featured.name)}</h3></div>
       <div class="goal-featured-amount">${fmt(featuredMetrics.current)} <span>de ${fmt(featuredMetrics.target)}</span></div>
       <div class="goal-progress-row"><span class="progress-label">${featuredMetrics.status.key==='done'?'Objetivo alcançado':'Construindo seu futuro'}</span><span class="percent">${featuredMetrics.pct.toFixed(1)}%</span></div>
-      <div class="goal-progress" aria-label="${featuredMetrics.pct.toFixed(1)}% concluído"><div class="goal-progress-fill" style="--goal-pct:${featuredMetrics.pct}%"></div></div>
+      <div class="goal-progress" aria-label="${featuredMetrics.pct.toFixed(1)}% concluído"><div class="goal-progress-fill" style="--goal-pct:${featuredMetrics.pct}"></div></div>
       <div class="goal-featured-meta"><span>Faltam <strong>${fmt(featuredMetrics.remaining)}</strong></span><span>📅 <strong>${featured.deadline?goalDateLabel(featured.deadline):'Sem prazo'}</strong></span></div>
       <div class="goal-insight"><b>🤖 Insight do Copiloto</b><br>${goalInsight(featuredMetrics)}</div>
     </div>
-    <div class="goal-featured-side"><div class="goal-ring" style="--goal-pct:${featuredMetrics.pct}%"><svg viewBox="0 0 36 36" aria-hidden="true"><circle class="goal-ring-track" cx="18" cy="18" r="15.5"/><circle class="goal-ring-progress" cx="18" cy="18" r="15.5"/></svg><div class="goal-ring-label">${featuredMetrics.pct.toFixed(0)}%<small>concluído</small></div></div><div class="goal-plan"><div class="goal-plan-label">Plano mensal</div><strong>${featuredMetrics.monthlyNeed?fmt(featuredMetrics.monthlyNeed):'Defina um prazo'}</strong><p>${featuredMetrics.monthlyNeed?'para alcançar a meta no prazo.':'e o Copiloto calcula seu caminho.'}</p><button class="goal-add-value" onclick="openGoalValueModal('${featured.id}')">+ Adicionar valor</button></div></div>
+    <div class="goal-featured-side"><div class="goal-ring" style="--goal-pct:${featuredMetrics.pct}"><svg viewBox="0 0 36 36" aria-hidden="true"><circle class="goal-ring-track" pathLength="100" cx="18" cy="18" r="15.5"/><circle class="goal-ring-progress" pathLength="100" cx="18" cy="18" r="15.5"/></svg><div class="goal-ring-label">${featuredMetrics.pct.toFixed(0)}%<small>concluído</small></div></div><div class="goal-plan"><div class="goal-plan-label">Plano mensal</div><strong>${featuredMetrics.monthlyNeed?fmt(featuredMetrics.monthlyNeed):'Defina um prazo'}</strong><p>${featuredMetrics.monthlyNeed?'para alcançar a meta no prazo.':'e o Copiloto calcula seu caminho.'}</p><button class="goal-add-value" onclick="openGoalValueModal('${featured.id}')">+ Adicionar valor</button></div></div>
   </div>` : '';
   return `<section class="goals-shell" id="goalsSection"><div class="goals-content">
     <div class="goals-header"><div><div class="goals-eyebrow">Seu futuro, em construção</div><h2>🎯 Minhas metas</h2><p>Transforme seus planos em objetivos reais.</p></div><button class="btn" onclick="openGoalModal()">+ Nova meta</button></div>
@@ -804,22 +893,29 @@ function render(){
     ${c.dailyAvg < (c.expense/Math.max(1,monthRange().today)) ? '<div class="note warn">⚠️ Seu ritmo de gastos está acima do recomendado.</div>' : '<div class="note ok">Você está dentro do seu limite. Continue assim.</div>'}
   </div>
 
-  <div class="card">
+  <div class="card budget-card">
     <h2 class="sec">📊 Orçamento do mês</h2>
-    <p class="hint">Aqui você define quanto pretende gastar em cada categoria (ex: R$ 800 em Alimentação). A barra enche conforme você registra despesas nessa categoria — fica amarela perto do limite e vermelha se passar.</p>
+    <p class="budget-intro">Defina limites por categoria e acompanhe seu ritmo de gastos sem perder de vista o mês inteiro.</p>
+    <div class="budget-summary">
+      <div class="budget-summary-copy">
+        <div class="budget-summary-label"><span>Uso do orçamento total</span><strong>${c.budgetUsedPct.toFixed(0)}%</strong></div>
+        <div class="bar-bg budget-overall-progress"><div class="bar-fill ${c.budgetUsedPct>100?'over':c.budgetUsedPct>80?'warn':''}" style="width:${Math.min(100,c.budgetUsedPct)}%"></div></div>
+        <div class="budget-summary-label" style="margin:8px 0 0;"><span>Gasto no mês</span><strong>${fmt(c.expense)} <small style="font:400 11px Inter;color:var(--gray);">de ${fmt(c.totalBudget)}</small></strong></div>
+      </div>
+      <div class="budget-total"><div><strong>${c.budgetUsedPct.toFixed(0)}%</strong><span>utilizado</span></div></div>
+    </div>
     <div class="budget-toolbar">
-      <span class="summary">${c.budgetUsedPct.toFixed(0)}% do orçamento total utilizado este mês</span>
+      <span class="summary">Limites por categoria</span>
       <button class="btn ghost sm" onclick="createCategory()">+ Nova categoria</button>
     </div>
-    <div class="bar-bg"><div class="bar-fill ${c.budgetUsedPct>100?'over':c.budgetUsedPct>80?'warn':''}" style="width:${Math.min(100,c.budgetUsedPct)}%"></div></div>
     ${c.totalBudget>0 ? (c.overBudgetCats>0 ? `<div class="note warn">🔴 ${c.overBudgetCats} categoria(s) ultrapassaram o orçamento.</div>` : `<div class="note ok">🟢 Você está dentro do orçamento definido.</div>`) : ''}
-    <div style="margin-top:16px;">
+    <div class="budget-category-list" style="margin-top:14px;">
       ${getCats().map(cat=>{
         const spent = catExpense(cat, c.monthTxns);
         const budget = state.budgets[cat] || 0;
         const pct = budget>0 ? Math.min(120,(spent/budget*100)) : 0;
         if(spent===0 && budget===0) return '';
-        return `<div class="cat-row">
+        return `<div class="cat-row budget-category">
           <div class="top-line"><span class="name">${cat}</span><span class="vals">Gasto: ${fmt(spent)}${budget>0?` de ${fmt(budget)}`:''}</span></div>
           <div class="bar-bg"><div class="bar-fill ${pct>100?'over':pct>80?'warn':''}" style="width:${Math.min(100,pct)}%"></div></div>
           <div class="budget-set">
@@ -838,19 +934,6 @@ function render(){
   </div>
 
   ${renderGoalsSection()}
-
-  <div class="card">
-    <h2 class="sec">🏦 Minhas contas</h2>
-    <p class="hint">Cadastre suas contas e carteiras. O saldo de cada uma é controlado por você — atualize quando quiser.</p>
-    <div class="note ok" style="margin:0 0 12px;">Saldo total disponível: ${fmt(state.accounts.reduce((s,a)=>s+a.balance,0))}</div>
-    ${state.accounts.length ? state.accounts.map(a=>`
-      <div class="bill">
-        <span class="nm">${a.name} <span style="color:var(--gray);font-size:12px;">· ${a.type}</span></span>
-        <span class="val">${fmt(a.balance)}</span>
-        <div class="row-actions"><button onclick="editAccount('${a.id}')">Editar</button><button onclick="deleteAccount('${a.id}')">Excluir</button></div>
-      </div>`).join('') : '<div class="empty">Nenhuma conta cadastrada ainda.</div>'}
-    <button class="btn ghost sm" onclick="openAccountModal()" style="margin-top:8px;">+ Nova conta</button>
-  </div>
 
   <div class="card">
     <h2 class="sec">💳 Cartões de crédito</h2>
@@ -877,10 +960,7 @@ function render(){
     ${buildAlerts(c).length ? buildAlerts(c).map(a=>`<div class="note ${a.cls}">${a.icon} ${a.t}</div>`).join('') : '<div class="empty">Nenhum alerta no momento. Tudo em ordem 🎉</div>'}
   </div>
 
-  <div class="card">
-    <h2 class="sec">🔎 Raio-X financeiro</h2>
-    ${buildInsights(c).map(x=>`<div class="insight">${x.i} ${x.t}</div>`).join('')}
-  </div>
+  ${renderFinancialXray(c)}
 
   <div class="card">
     <h2 class="sec">📅 Contas deste mês</h2>
