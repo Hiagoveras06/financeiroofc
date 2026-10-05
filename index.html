@@ -552,7 +552,7 @@ h2.sec{font-size:15px;text-transform:none;color:var(--white);margin:0 0 14px;fon
 <div class="modal-bg" id="balModalBg">
   <div class="modal">
     <h3>Meu saldo real</h3>
-    <p class="hint" style="margin-top:-4px;">Informe quanto você tem agora, somando contas e carteiras. A partir de amanhã, esse valor sobe e desce sozinho conforme você lança receitas e despesas — você não precisa digitar de novo.</p>
+    <p class="hint" style="margin-top:-4px;">Informe quanto você tem agora, somando contas e carteiras. A partir de amanhã, esse valor sobe e desce sozinho conforme você lança receitas e despesas. Você não precisa digitar de novo.</p>
     <div class="field"><label>Meu saldo agora (R$)</label><input id="bal_val" type="number" step="0.01" placeholder="0,00"></div>
     <div class="modal-actions">
       <button class="btn ghost" onclick="closeBalanceModal()">Cancelar</button>
@@ -707,7 +707,7 @@ function overallVerdict(c){
   if(c.income===0 && c.expense===0) return {emoji:'⚪',text:'Adicione lançamentos para ver seu resumo',cls:'neutral'};
   if(c.health>=75) return {emoji:'🟢',text:'Você está indo bem este mês',cls:'ok'};
   if(c.health>=50) return {emoji:'🟡',text:'Seu mês pede um pouco de atenção',cls:'warn'};
-  return {emoji:'🔴',text:'Seu mês está no vermelho — hora de agir',cls:'bad'};
+  return {emoji:'🔴',text:'Seu mês está no vermelho. Hora de agir',cls:'bad'};
 }
 function healthLabel(h, hasData=true){
   if(!hasData) return "Adicione lançamentos para atualizar seu score.";
@@ -931,7 +931,7 @@ function render(){
 
   <div class="card balance-card" style="border-color:rgba(16,185,129,.35);">
     <h2 class="sec">💰 Meu saldo real</h2>
-    <p class="hint">Digite quanto você tem agora, no total. Depois disso, cada lançamento que você adicionar soma ou desconta sozinho — você não precisa ficar atualizando.</p>
+    <p class="hint">Digite quanto você tem agora, no total. Depois disso, cada lançamento que você adicionar soma ou desconta sozinho. Você não precisa ficar atualizando.</p>
     ${(()=>{ const rb = computeRealBalance(); return rb!==null
       ? `<div class="amt">${fmt(rb)}</div><div style="font-size:12px;color:var(--gray);">Base informada em ${new Date(state.realBalanceDate+'T00:00:00').toLocaleDateString('pt-BR')}</div>`
       : `<div class="amt" style="color:${c.balance>=0?'var(--em)':'var(--red)'}">${fmt(c.balance)}</div><div style="font-size:12px;color:var(--gray);">Saldo calculado: receitas menos despesas deste mês.</div>`; })()}
@@ -1025,7 +1025,7 @@ function render(){
 
   <div class="card">
     <h2 class="sec">🔔 Alertas</h2>
-    <p class="hint">Avisos automáticos gerados a partir dos seus próprios dados — orçamento, contas, cartões e metas.</p>
+    <p class="hint">Avisos automáticos gerados a partir dos seus próprios dados, como orçamento, contas, cartões e metas.</p>
     ${buildAlerts(c).length ? buildAlerts(c).map(a=>`<div class="note ${a.cls}">${a.icon} ${a.t}</div>`).join('') : '<div class="empty">Nenhum alerta no momento. Tudo em ordem 🎉</div>'}
   </div>
 
@@ -1033,7 +1033,7 @@ function render(){
 
   <div class="card nav-anchor" id="contas">
     <h2 class="sec">📅 Contas deste mês</h2>
-    <p class="hint">Suas contas que se repetem todo mês. Marque a caixinha quando pagar — isso atualiza seu saldo disponível na hora.</p>
+    <p class="hint">Suas contas que se repetem todo mês. Marque a caixinha quando pagar para atualizar seu saldo disponível na hora.</p>
     ${state.bills.length ? state.bills.map(b=>`
       <div class="bill">
         <input type="checkbox" ${b.paid?'checked':''} onchange="toggleBill('${b.id}')" title="Marcar como paga">
